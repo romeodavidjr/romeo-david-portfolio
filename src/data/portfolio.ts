@@ -19,7 +19,7 @@ export const siteConfig = {
 export const about = {
   paragraphs: [
     "Results-driven Senior Telecommunications Engineer with 19+ years of experience in telecom project management, multi-vendor network operations, and custom automation development. Currently serving as Data & Automation Team Lead at ASTEK Saudi Arabia Limited, leading Operations & Maintenance for IDEMIA MestaFusion Automatic Traffic Monitoring Systems (ATMS) across 100+ sites in the KSA Central Region.",
-    "Achieved 96.9% YTD SLA compliance with an average MTTR of 23 hours. Independently developed custom automation tools (Python and PowerShell) and Power BI dashboards that reduced daily data-processing time by 65–80%. Skilled in Generative AI-assisted development, cross-functional leadership, and delivering clear technical insights to stakeholders.",
+    "Achieved 96.9% YTD SLA compliance with an average MTTR of 23 hours. Independently developed custom automation tools (Python and PowerShell) and Power BI dashboards that reduced daily data-processing time by 65–80%. Skilled in Generative AI and Agentic AI-assisted development, cross-functional leadership, and delivering clear technical insights to stakeholders.",
   ],
   highlights: [
     { label: "Years Experience", value: "19+" },
@@ -176,7 +176,7 @@ export const projects: Project[] = [
     subtitle: "Field Engineer Ticket & Restoration Management System",
     period: "2026",
     description:
-      "Full-stack web application to automate O&M ticket management for field engineers. I defined the requirements, features, and workflow, and used Generative AI with significant assistance to accelerate development of the full-stack application.",
+      "Full-stack web application to automate O&M ticket management for field engineers. I defined the requirements, features, and workflow, and used Generative AI and Agentic AI assistance to accelerate development of the full-stack application.",
     features: [
       "Requirements, features, and workflow defined and directed by me; Generative AI used to accelerate full-stack development",
       "OCR-based ticket creation from photos",
@@ -257,7 +257,7 @@ export const skillGroups = [
     skills: [
       "Python",
       "Power BI Dashboards",
-      "Generative AI-assisted Development",
+      "Generative AI & Agentic AI-assisted Development",
     ],
   },
   {
