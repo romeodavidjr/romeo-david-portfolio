@@ -10,7 +10,7 @@ export const siteConfig = {
   linkedinDisplay: "linkedin.com/in/romeodavidjr",
   location: "Riyadh, Kingdom of Saudi Arabia",
   phone: "", // Optional — add if desired
-  cvPath: "/cv/Romeo-David-Jr-CV.pdf",
+  cvPath: "/cv/Romeo_David_Jr_CV.pdf",
   /** Place file in /public — use lowercase extension (profile.jpg) for Linux/Vercel */
   profilePhoto: "/profile.jpg",
   copyrightYear: 2026,
