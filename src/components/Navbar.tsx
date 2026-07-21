@@ -55,9 +55,7 @@ export default function Navbar() {
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-dim text-sm font-bold text-accent ring-1 ring-accent/30 transition group-hover:ring-accent/60">
             RD
           </span>
-          <span className="hidden sm:inline">
-            {siteConfig.name.split(" ").slice(0, 2).join(" ")}
-          </span>
+          <span className="hidden sm:inline">Romeo David Jr.</span>
         </a>
 
         <ul className="hidden items-center gap-0.5 lg:flex">
