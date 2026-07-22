@@ -3,6 +3,14 @@ import SectionHeading from "./SectionHeading";
 import ScrollReveal from "./ScrollReveal";
 import { experience } from "@/data/portfolio";
 
+/**
+ * Experience timeline layout:
+ * - mobile (<768px): stacked cards only (no timeline)
+ * - tablet (768–1023px): CSS grid rail [1.875rem | content] + continuous line
+ * - desktop (≥1024px): wider rail [7.5rem | content] matching original spacing
+ *
+ * Nested tools stay inside the card flow so they cannot escape the timeline.
+ */
 export default function Experience() {
   return (
     <section
@@ -18,35 +26,38 @@ export default function Experience() {
           />
         </ScrollReveal>
 
-        {/*
-          Timeline behavior by breakpoint:
-          - mobile (< md): no timeline (unchanged)
-          - tablet (md–lg): left-rail timeline + card offset
-          - desktop (lg+): original left-rail spacing preserved
-        */}
         <div className="relative">
-          {/* Timeline line */}
+          {/*
+            Continuous timeline line sits in the rail column center.
+            md: 1.875rem rail → center at 0.9375rem
+            lg: 7.5rem rail → center at 3.75rem
+          */}
           <div
-            className="absolute top-2 bottom-2 left-4 z-0 hidden w-[3px] rounded-full bg-gradient-to-b from-accent via-accent/50 to-border md:block lg:left-[7.5rem]"
+            className="pointer-events-none absolute top-2 bottom-2 left-[0.9375rem] z-0 hidden w-[3px] -translate-x-1/2 rounded-full bg-gradient-to-b from-accent via-accent/50 to-border md:block lg:left-[3.75rem]"
             aria-hidden
           />
           <div
-            className="absolute top-2 bottom-2 left-4 z-0 hidden w-[3px] rounded-full bg-accent/20 blur-[2px] md:block lg:left-[7.5rem]"
+            className="pointer-events-none absolute top-2 bottom-2 left-[0.9375rem] z-0 hidden w-[3px] -translate-x-1/2 rounded-full bg-accent/20 blur-[2px] md:block lg:left-[3.75rem]"
             aria-hidden
           />
 
-          <div className="relative z-[1] space-y-6 md:space-y-8">
+          <ol className="relative z-[1] m-0 list-none space-y-6 p-0 md:space-y-8">
             {experience.map((job, index) => (
-              <ScrollReveal key={job.company} delay={index * 70}>
-                <article className="relative">
-                  {/* Timeline dot — aligned with the left rail on md+, same as desktop on lg+ */}
-                  <div
-                    className="absolute top-8 left-4 z-10 hidden h-3.5 w-3.5 -translate-x-1/2 rounded-full border-[2.5px] border-accent bg-bg shadow-[0_0_0_4px_rgba(45,212,191,0.12),0_0_16px_rgba(45,212,191,0.55)] md:block lg:left-[7.5rem]"
-                    aria-hidden
-                  />
+              <li
+                key={job.company}
+                className="grid grid-cols-1 md:grid-cols-[1.875rem_minmax(0,1fr)] md:gap-x-5 lg:grid-cols-[7.5rem_minmax(0,1fr)] lg:gap-x-6"
+              >
+                {/* Timeline rail + dot (tablet & desktop only) */}
+                <div
+                  className="relative hidden md:block"
+                  aria-hidden
+                >
+                  <span className="absolute top-8 left-1/2 z-10 h-3.5 w-3.5 -translate-x-1/2 rounded-full border-[2.5px] border-accent bg-bg shadow-[0_0_0_4px_rgba(45,212,191,0.12),0_0_16px_rgba(45,212,191,0.55)]" />
+                </div>
 
-                  {/* Cards clear the rail: modest offset on tablet, original on desktop */}
-                  <div className="card-surface relative z-[1] min-w-0 p-5 sm:p-7 md:ml-10 lg:ml-[9.5rem]">
+                {/* Card column — minmax(0,1fr) prevents nested grids from overflowing */}
+                <ScrollReveal delay={index * 70} className="min-w-0">
+                  <article className="card-surface isolate min-w-0 p-5 sm:p-7">
                     <div className="flex flex-col gap-3 border-b border-border/70 pb-4 sm:flex-row sm:items-start sm:justify-between sm:pb-5">
                       <div className="min-w-0">
                         <h3 className="text-base font-bold leading-snug text-text sm:text-lg md:text-xl">
@@ -88,7 +99,7 @@ export default function Experience() {
                     </ul>
 
                     {job.nestedTools && job.nestedTools.length > 0 && (
-                      <div className="relative z-[1] mt-5 min-w-0 rounded-xl border border-accent/15 bg-bg/40 p-4 sm:mt-6 sm:p-5">
+                      <div className="mt-5 min-w-0 rounded-xl border border-accent/15 bg-bg/40 p-4 sm:mt-6 sm:p-5">
                         <div className="mb-3 flex items-center gap-2">
                           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent-dim text-accent ring-1 ring-accent/20">
                             <Wrench size={14} />
@@ -97,16 +108,24 @@ export default function Experience() {
                             Custom automation tools
                           </p>
                         </div>
+                        {/*
+                          Tablet (md only): single column for nested tools avoids
+                          cramped 2-col overflow inside the already-narrow card.
+                          2×2 resumes from lg (desktop) and also works from sm on
+                          wide phones — use sm:grid-cols-2 for phones in landscape
+                          and lg stays 2-col. For iPad portrait (~768–1024), md is
+                          active; keep 2 cols but force min-w-0 so nothing escapes.
+                        */}
                         <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
                           {job.nestedTools.map((tool) => (
                             <div
                               key={tool.name}
-                              className="card-nested min-w-0 p-3.5 sm:p-4"
+                              className="card-nested min-w-0 break-words p-3.5 sm:p-4"
                             >
                               <p className="text-sm font-semibold leading-snug text-text">
                                 {tool.name}
                               </p>
-                              <p className="mt-1.5 text-xs leading-relaxed text-text-dim">
+                              <p className="mt-1.5 text-xs leading-relaxed break-words text-text-dim">
                                 {tool.description}
                               </p>
                             </div>
@@ -114,11 +133,11 @@ export default function Experience() {
                         </div>
                       </div>
                     )}
-                  </div>
-                </article>
-              </ScrollReveal>
+                  </article>
+                </ScrollReveal>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </div>
     </section>
