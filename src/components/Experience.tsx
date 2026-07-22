@@ -4,8 +4,8 @@ import ScrollReveal from "./ScrollReveal";
 import { experience } from "@/data/portfolio";
 
 /**
- * Clean stacked-card Experience layout — no timeline on any breakpoint.
- * Works consistently on phone, iPad portrait/landscape, and desktop.
+ * Experience — stacked cards only.
+ * No timeline line, dots, left rail, absolute markers, or pseudo-elements.
  */
 export default function Experience() {
   return (
@@ -22,11 +22,12 @@ export default function Experience() {
           />
         </ScrollReveal>
 
-        <div className="flex flex-col gap-5 sm:gap-6 lg:gap-7">
+        {/* Stacked role cards — no timeline chrome of any kind */}
+        <div className="experience-stack flex w-full flex-col gap-5 sm:gap-6 lg:gap-7">
           {experience.map((job, index) => (
-            <ScrollReveal key={job.company} delay={index * 70}>
-              <article className="card-surface w-full min-w-0 p-5 sm:p-6 lg:p-8">
-                <header className="flex flex-col gap-3 border-b border-border/70 pb-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:pb-5">
+            <ScrollReveal key={job.company} delay={index * 60} className="w-full">
+              <article className="card-surface relative w-full p-5 sm:p-6 lg:p-8">
+                <div className="flex flex-col gap-3 border-b border-border/70 pb-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:pb-5">
                   <div className="min-w-0 flex-1">
                     <h3 className="text-base font-bold leading-snug text-text sm:text-lg lg:text-xl">
                       {job.role}
@@ -44,21 +45,21 @@ export default function Experience() {
                     <span className="inline-flex w-fit rounded-full bg-accent-dim px-3 py-1 text-[11px] font-semibold tracking-wide text-accent ring-1 ring-accent/25 sm:text-xs">
                       {job.period}
                     </span>
-                    <span className="inline-flex items-center gap-1 text-xs text-text-dim sm:justify-end">
-                      <MapPin size={12} />
+                    <span className="inline-flex items-center gap-1 text-xs text-text-dim">
+                      <MapPin size={12} aria-hidden />
                       {job.location}
                     </span>
                   </div>
-                </header>
+                </div>
 
-                <ul className="mt-4 space-y-2.5 sm:mt-5 sm:space-y-3">
+                <ul className="mt-4 list-none space-y-2.5 p-0 sm:mt-5 sm:space-y-3">
                   {job.bullets.map((bullet, i) => (
                     <li
                       key={i}
                       className="flex gap-3 text-sm leading-relaxed text-text-muted sm:text-[0.95rem]"
                     >
                       <span
-                        className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent-blue shadow-[0_0_6px_rgba(56,189,248,0.6)]"
+                        className="mt-2 inline-block h-1 w-1 shrink-0 rounded-full bg-accent-blue"
                         aria-hidden
                       />
                       <span className="min-w-0">{bullet}</span>
@@ -67,16 +68,16 @@ export default function Experience() {
                 </ul>
 
                 {job.nestedTools && job.nestedTools.length > 0 ? (
-                  <div className="mt-5 w-full min-w-0 rounded-xl border border-accent/15 bg-bg/40 p-4 sm:mt-6 sm:p-5">
+                  <div className="mt-5 w-full rounded-xl border border-accent/15 bg-bg/40 p-4 sm:mt-6 sm:p-5">
                     <div className="mb-3 flex items-center gap-2">
                       <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent-dim text-accent ring-1 ring-accent/20">
-                        <Wrench size={14} />
+                        <Wrench size={14} aria-hidden />
                       </span>
                       <p className="text-xs font-semibold tracking-wide text-accent uppercase sm:text-[13px]">
                         Custom automation tools
                       </p>
                     </div>
-                    <div className="grid w-full min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
+                    <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
                       {job.nestedTools.map((tool) => (
                         <div
                           key={tool.name}

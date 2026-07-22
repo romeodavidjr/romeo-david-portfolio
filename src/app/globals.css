@@ -31,19 +31,9 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Ensure form controls and UI inherit Inter */
-button,
-input,
-textarea,
-select {
-  font-family: inherit;
-}
   background-color: var(--color-bg);
-  /* Fixed site-wide atmosphere: navy base + soft teal/cyan glow + refined technical grid */
+  /* Soft atmosphere only — no full-page technical grid (avoids looking like a timeline) */
   background-image:
-    /* Soft accent glows */
     radial-gradient(
       ellipse 90% 55% at 50% -15%,
       rgba(45, 212, 191, 0.07),
@@ -58,40 +48,17 @@ select {
       ellipse 45% 40% at 0% 70%,
       rgba(45, 212, 191, 0.035),
       transparent 55%
-    ),
-    /* Fine technical grid */
-    linear-gradient(
-      to right,
-      rgba(148, 163, 184, 0.035) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(148, 163, 184, 0.035) 1px,
-      transparent 1px
-    ),
-    /* Larger major grid lines */
-    linear-gradient(
-      to right,
-      rgba(45, 212, 191, 0.03) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(45, 212, 191, 0.03) 1px,
-      transparent 1px
     );
-  background-size:
-    auto,
-    auto,
-    auto,
-    48px 48px,
-    48px 48px,
-    192px 192px,
-    192px 192px;
   background-attachment: fixed;
-  background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat, repeat,
-    repeat;
+  background-repeat: no-repeat;
+}
+
+/* Ensure form controls and UI inherit Inter */
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
 }
 
 ::selection {
@@ -407,6 +374,29 @@ select {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
   border-radius: 0.375rem;
+}
+
+/* Experience: guarantee zero timeline decorations on every breakpoint */
+#experience .experience-stack {
+  position: relative;
+  padding-left: 0;
+  margin-left: 0;
+  border-left: none;
+}
+
+#experience .experience-stack::before,
+#experience .experience-stack::after,
+#experience article::before,
+#experience article::after,
+#experience li::before,
+#experience li::after {
+  content: none !important;
+  display: none !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 /* Prefer reduced motion */
