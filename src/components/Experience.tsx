@@ -4,9 +4,12 @@ import ScrollReveal from "./ScrollReveal";
 import { experience } from "@/data/portfolio";
 
 /**
- * Experience layout (see globals.css `.experience-timeline*`):
- * - mobile + tablet (<1024px): full-width stacked cards, no timeline
- * - desktop (≥1024px): left-rail timeline with dots
+ * Timeline visibility (see globals.css):
+ * - ≤1024px (phones + iPad portrait, including 1024px-wide iPads): no timeline
+ * - ≥1025px (large desktop): left-rail timeline
+ *
+ * Root cause of prior iPad bugs: CSS used min-width:1024px for desktop,
+ * which matches many iPad portrait viewports exactly.
  */
 export default function Experience() {
   return (
@@ -23,20 +26,27 @@ export default function Experience() {
           />
         </ScrollReveal>
 
-        <div className="experience-timeline">
-          <div className="experience-timeline__line" aria-hidden />
+        <div className="experience-timeline max-[1024px]:!pl-0">
+          {/* Timeline chrome — forced hidden ≤1024px via CSS + Tailwind */}
           <div
-            className="experience-timeline__line experience-timeline__line--glow"
+            className="experience-timeline__line max-[1024px]:!hidden min-[1025px]:!block"
+            aria-hidden
+          />
+          <div
+            className="experience-timeline__line experience-timeline__line--glow max-[1024px]:!hidden min-[1025px]:!block"
             aria-hidden
           />
 
           <ul className="experience-timeline__list">
             {experience.map((job, index) => (
               <li key={job.company} className="experience-timeline__item">
-                <span className="experience-timeline__dot" aria-hidden />
+                <span
+                  className="experience-timeline__dot max-[1024px]:!hidden min-[1025px]:!block"
+                  aria-hidden
+                />
 
-                <ScrollReveal delay={index * 70} className="min-w-0">
-                  <article className="card-surface experience-timeline__card p-5 sm:p-6 lg:p-7">
+                <ScrollReveal delay={index * 70} className="min-w-0 w-full">
+                  <article className="card-surface experience-timeline__card w-full p-5 sm:p-6 lg:p-7">
                     <div className="flex flex-col gap-3 border-b border-border/70 pb-4 sm:flex-row sm:items-start sm:justify-between sm:pb-5">
                       <div className="min-w-0 flex-1">
                         <h3 className="text-base font-bold leading-snug text-text sm:text-lg lg:text-xl">
@@ -78,7 +88,7 @@ export default function Experience() {
                     </ul>
 
                     {job.nestedTools && job.nestedTools.length > 0 && (
-                      <div className="mt-5 min-w-0 rounded-xl border border-accent/15 bg-bg/40 p-4 sm:mt-6 sm:p-5">
+                      <div className="mt-5 min-w-0 w-full rounded-xl border border-accent/15 bg-bg/40 p-4 sm:mt-6 sm:p-5">
                         <div className="mb-3 flex items-center gap-2">
                           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent-dim text-accent ring-1 ring-accent/20">
                             <Wrench size={14} />
@@ -87,7 +97,7 @@ export default function Experience() {
                             Custom automation tools
                           </p>
                         </div>
-                        <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
+                        <div className="grid min-w-0 w-full grid-cols-1 gap-3 sm:grid-cols-2">
                           {job.nestedTools.map((tool) => (
                             <div
                               key={tool.name}
