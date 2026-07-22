@@ -24,11 +24,62 @@ html {
 }
 
 body {
-  background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-bg);
+  /* Fixed site-wide atmosphere: navy base + soft teal/cyan glow + refined technical grid */
+  background-image:
+    /* Soft accent glows */
+    radial-gradient(
+      ellipse 90% 55% at 50% -15%,
+      rgba(45, 212, 191, 0.07),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 50% 45% at 100% 20%,
+      rgba(56, 189, 248, 0.045),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 45% 40% at 0% 70%,
+      rgba(45, 212, 191, 0.035),
+      transparent 55%
+    ),
+    /* Fine technical grid */
+    linear-gradient(
+      to right,
+      rgba(148, 163, 184, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(148, 163, 184, 0.035) 1px,
+      transparent 1px
+    ),
+    /* Larger major grid lines */
+    linear-gradient(
+      to right,
+      rgba(45, 212, 191, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(45, 212, 191, 0.03) 1px,
+      transparent 1px
+    );
+  background-size:
+    auto,
+    auto,
+    auto,
+    48px 48px,
+    48px 48px,
+    192px 192px,
+    192px 192px;
+  background-attachment: fixed;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat, repeat,
+    repeat;
 }
 
 ::selection {
@@ -51,20 +102,51 @@ body {
   background: var(--color-text-dim);
 }
 
-/* Gradient mesh background utility */
+/* Gradient mesh background utility (hero / featured sections) */
 .bg-mesh {
+  background-color: transparent;
   background-image:
-    radial-gradient(ellipse 80% 55% at 50% -18%, rgba(45, 212, 191, 0.16), transparent 55%),
-    radial-gradient(ellipse 55% 40% at 100% 8%, rgba(56, 189, 248, 0.1), transparent 50%),
-    radial-gradient(ellipse 45% 35% at 0% 55%, rgba(45, 212, 191, 0.06), transparent 55%);
+    radial-gradient(
+      ellipse 85% 50% at 50% -12%,
+      rgba(45, 212, 191, 0.12),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 50% 42% at 95% 10%,
+      rgba(56, 189, 248, 0.07),
+      transparent 52%
+    ),
+    radial-gradient(
+      ellipse 42% 38% at 5% 60%,
+      rgba(45, 212, 191, 0.05),
+      transparent 55%
+    );
 }
 
-/* Subtle grid pattern */
+/* Refined technical grid overlay */
 .bg-grid {
-  background-size: 56px 56px;
+  background-size: 40px 40px, 40px 40px, 160px 160px, 160px 160px;
   background-image:
-    linear-gradient(to right, rgba(30, 42, 63, 0.35) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(30, 42, 63, 0.35) 1px, transparent 1px);
+    linear-gradient(
+      to right,
+      rgba(148, 163, 184, 0.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(148, 163, 184, 0.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to right,
+      rgba(45, 212, 191, 0.045) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(45, 212, 191, 0.045) 1px,
+      transparent 1px
+    );
 }
 
 /* ── Premium card surface ── */
