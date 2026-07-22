@@ -23,10 +23,10 @@ export default function Experience() {
         </ScrollReveal>
 
         {/* Stacked role cards — no timeline chrome of any kind */}
-        <div className="experience-stack flex w-full flex-col gap-7 sm:gap-8 lg:gap-9">
+        <div className="experience-stack flex w-full flex-col gap-8 sm:gap-9 lg:gap-10">
           {experience.map((job, index) => (
             <ScrollReveal key={job.company} delay={index * 60} className="w-full">
-              <article className="card-surface relative w-full border-l-[3px] border-l-accent/70 p-5 sm:p-6 lg:p-8">
+              <article className="card-surface experience-card relative w-full p-5 sm:p-6 lg:p-8">
                 <div className="flex flex-col gap-3 border-b border-border/70 pb-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:pb-5">
                   <div className="min-w-0 flex-1">
                     <h3 className="text-base font-bold leading-snug text-text sm:text-lg lg:text-xl">
