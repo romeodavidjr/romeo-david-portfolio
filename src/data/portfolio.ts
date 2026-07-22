@@ -98,7 +98,7 @@ export const experience: ExperienceItem[] = [
       "Achieved 96.9% YTD SLA compliance across 256 O&M tickets with zero overdue tickets and 100% restoration rate; maintained an average MTTR of 23 hours.",
       "Independently developed and deployed four custom automation tools that transformed daily ATMS operations.",
       "Built interactive Power BI dashboards visualizing traffic data, hourly trends, and site performance, enabling 65–80% faster reporting and decision-making.",
-      "Led site surveys, audits, new site installations, and pre-rollout firmware/patch testing with direct feedback to IDEMIA France.",
+      "Led site surveys, audits, new site installations, and pre-rollout firmware/patch testing (providing feedback to IDEMIA France).",
     ],
     nestedTools: [
       {
