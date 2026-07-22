@@ -4,12 +4,9 @@ import ScrollReveal from "./ScrollReveal";
 import { experience } from "@/data/portfolio";
 
 /**
- * Experience timeline uses dedicated CSS classes (see globals.css):
- * - mobile (<768px): no timeline, full-width cards
- * - tablet (768–1023px): LEFT rail only (never centered)
- * - desktop (≥1024px): wider LEFT rail
- *
- * Markers sit in reserved padding; cards never share that space → no title overlap.
+ * Experience layout (see globals.css `.experience-timeline*`):
+ * - mobile + tablet (<1024px): full-width stacked cards, no timeline
+ * - desktop (≥1024px): left-rail timeline with dots
  */
 export default function Experience() {
   return (
