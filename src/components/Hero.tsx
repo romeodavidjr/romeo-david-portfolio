@@ -91,9 +91,6 @@ export default function Hero() {
                 aria-hidden
               />
             </div>
-            <div className="absolute -right-2 -bottom-2 rounded-xl border border-accent/25 bg-bg-elevated/95 px-3 py-1.5 text-xs font-medium text-accent shadow-lg shadow-black/30 backdrop-blur-sm sm:text-sm">
-              Open to opportunities
-            </div>
           </div>
         </div>
       </div>
