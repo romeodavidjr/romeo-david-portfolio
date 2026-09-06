@@ -1,4 +1,4 @@
-export const siteConfig = {
+﻿export const siteConfig = {
   name: "Romeo B. David Jr.",
   /** Full formal name for copyright / footer line only */
   copyrightName: "Romeo B. David Jr., PECE, ASEAN Eng., P. Eng. (SCE)",
@@ -19,12 +19,12 @@ export const siteConfig = {
 export const about = {
   paragraphs: [
     "Results-driven Senior Telecommunications Engineer with 19+ years of experience in telecom project management, multi-vendor network operations, and custom automation development. Currently serving as Data & Automation Team Lead at ASTEK Saudi Arabia Limited, leading Operations & Maintenance for IDEMIA MestaFusion Automatic Traffic Monitoring Systems (ATMS) across 100+ sites in the KSA Central Region.",
-    "Achieved 96.9% YTD SLA compliance with an average MTTR of 23 hours. Independently developed custom automation tools (Python and PowerShell) and Power BI dashboards that reduced daily data-processing time by 65–80%. Skilled in Generative AI and Agentic AI-assisted development, cross-functional leadership, and delivering clear technical insights to stakeholders.",
+    "Achieved 97.4% YTD SLA compliance with an average MTTR of 22.5 hours. Independently developed custom automation tools (Python and PowerShell) and Power BI dashboards that reduced daily data-processing time by 65–80%. Skilled in Generative AI and Agentic AI-assisted development, cross-functional leadership, and delivering clear technical insights to stakeholders.",
   ],
   highlights: [
     { label: "Years Experience", value: "19+" },
-    { label: "SLA Compliance", value: "96.9%" },
-    { label: "Avg. MTTR", value: "23h" },
+    { label: "SLA Compliance", value: "97.4%" },
+    { label: "Avg. MTTR", value: "22.5h" },
     { label: "Sites Overseen", value: "100+" },
   ],
 };
@@ -38,13 +38,13 @@ export type Achievement = {
 
 export const achievements: Achievement[] = [
   {
-    value: "96.9%",
+    value: "97.4%",
     label: "YTD SLA Compliance",
-    description: "Across 256 O&M tickets with zero overdue tickets and full restoration rate.",
+    description: "Across 346 O&M tickets with zero overdue tickets and full restoration rate.",
     emphasis: "metric",
   },
   {
-    value: "23h",
+    value: "22.5h",
     label: "Average MTTR",
     description: "Mean time to restore maintained across live ATMS operations.",
     emphasis: "metric",
@@ -95,7 +95,7 @@ export const experience: ExperienceItem[] = [
     location: "Riyadh, KSA",
     bullets: [
       "Lead O&M for IDEMIA MestaFusion ATMS across the KSA Central Region, overseeing technical support and cross-regional collaboration for 100+ live traffic monitoring sites.",
-      "Achieved 96.9% YTD SLA compliance across 256 O&M tickets with zero overdue tickets and 100% restoration rate; maintained an average MTTR of 23 hours.",
+      "Achieved 97.4% YTD SLA compliance across 346 O&M tickets with zero overdue tickets and 100% restoration rate; maintained an average MTTR of 22.5 hours.",
       "Independently developed and deployed four custom automation tools that transformed daily ATMS operations.",
       "Built interactive Power BI dashboards visualizing traffic data, hourly trends, and site performance, enabling 65–80% faster reporting and decision-making.",
       "Led site surveys, audits, new site installations, and pre-rollout firmware/patch testing (providing feedback to IDEMIA France).",
