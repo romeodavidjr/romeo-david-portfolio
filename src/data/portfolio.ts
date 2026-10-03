@@ -69,10 +69,10 @@ export const achievements: Achievement[] = [
     emphasis: "highlight",
   },
   {
-    value: "4",
+    value: "6",
     label: "Production Tools Delivered",
     description:
-      "Independently developed 4 custom automation tools (3 Python GUI tools + SMART Drive Health Monitor) plus Power BI dashboards.",
+      "Independently developed 6 custom automation tools for ATMS operations, plus Power BI dashboards.",
     emphasis: "highlight",
   },
 ];
