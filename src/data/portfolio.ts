@@ -19,7 +19,7 @@
 export const about = {
   paragraphs: [
     "Results-driven Senior Telecommunications Engineer with 19+ years of experience in telecom project management, multi-vendor network operations, and custom automation development. Currently serving as Data & Automation Team Lead at ASTEK Saudi Arabia Limited, leading Operations & Maintenance for IDEMIA MestaFusion Automatic Traffic Monitoring Systems (ATMS) across 100+ sites in the KSA Central Region.",
-    "Achieved 97.6% YTD SLA compliance with an average MTTR of 22.1 hours. Independently developed custom automation tools (Python and PowerShell) and Power BI dashboards that reduced daily data-processing time by 65–80%. Skilled in Generative AI and Agentic AI-assisted development, cross-functional leadership, and delivering clear technical insights to stakeholders.",
+    "Achieved 97.6% YTD SLA compliance with an average MTTR of 22.1 hours. Independently developed six custom automation tools (Python and PowerShell) and Power BI dashboards that reduced daily data-processing time by 65–80%. Skilled in Generative AI and Agentic AI-assisted development, cross-functional leadership, and delivering clear technical insights to stakeholders.",
   ],
   highlights: [
     { label: "Years Experience", value: "19+" },
@@ -204,10 +204,10 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "Custom Python Automation Tools",
+    title: "ATMS Automation Tools",
     subtitle: "Developed for ATMS operations",
     description:
-      "Suite of production Python GUI tools that streamlined daily traffic monitoring operations, violation handling, and inventory workflows.",
+      "Six tools for traffic reporting, violation review, serial inventory, drive health, spare usage, and a live site map.",
     items: [
       {
         name: "Traffic Data Analysis Tool",
