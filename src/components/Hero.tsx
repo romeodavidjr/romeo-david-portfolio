@@ -27,7 +27,11 @@ export default function Hero() {
             {siteConfig.name}
           </h1>
           <p className="mt-4 max-w-xl animate-fade-in-up animation-delay-200 text-base font-semibold leading-snug text-accent-blue opacity-0 sm:mt-5 sm:text-xl sm:leading-snug">
-            {siteConfig.title}
+            {siteConfig.title.split(" | ").map((part) => (
+              <span key={part} className="block">
+                {part}
+              </span>
+            ))}
           </p>
           <p className="mt-4 max-w-xl animate-fade-in-up animation-delay-300 text-[0.95rem] leading-relaxed text-text-muted opacity-0 sm:mt-5 sm:text-lg">
             {siteConfig.tagline}
