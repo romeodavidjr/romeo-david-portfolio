@@ -205,7 +205,7 @@ export const projects: Project[] = [
   },
   {
     title: "ATMS Automation Tools",
-    subtitle: "Developed for ATMS operations",
+    subtitle: "Supporting daily field work",
     description:
       "Six tools for traffic reporting, violation review, serial inventory, drive health, spare usage, and a live site map.",
     items: [
