@@ -96,7 +96,7 @@ export const experience: ExperienceItem[] = [
     bullets: [
       "Lead O&M for IDEMIA MestaFusion ATMS across the KSA Central Region, overseeing technical support and cross-regional collaboration for 100+ live traffic monitoring sites.",
       "Achieved 97.6% YTD SLA compliance across 372 O&M tickets with zero overdue tickets and 100% restoration rate; maintained an average MTTR of 22.1 hours.",
-      "Independently developed and deployed four custom automation tools that transformed daily ATMS operations.",
+      "Independently developed and actively use six custom automation tools that transformed daily ATMS operations.",
       "Built interactive Power BI dashboards visualizing traffic data, hourly trends, and site performance, enabling 65–80% faster reporting and decision-making.",
       "Led site surveys, audits, new site installations, and pre-rollout firmware/patch testing (providing feedback to IDEMIA France).",
     ],
@@ -109,17 +109,27 @@ export const experience: ExperienceItem[] = [
       {
         name: "Traffic Violation Manager (TVM)",
         description:
-          "Segregates violation XMLs and media by site, type, and lane; includes EXIF extraction, video playback, and Excel/PowerPoint exports.",
+          "Simplifies case review by organizing violation files and media by site, type, and lane, with photo and video playback, EXIF verification, and Excel and one-page PDF reports.",
       },
       {
         name: "Hardware Serial Manager (HSM)",
         description:
-          "Parses hardware configurations into searchable CSV inventory with duplicate detection.",
+          "Scrapes cabinet serials into the inventory for easier tracking, then syncs the confirmed update to Drive without duplicate rows.",
       },
       {
         name: "SMART Drive Health Monitor",
         description:
           "PowerShell-based field tool for remote SMART health monitoring of HDDs and SSDs on ATMS devices via SSH. Collects drive health data, detects issues, provides replacement recommendations, and generates XML reports.",
+      },
+      {
+        name: "Spare Usage",
+        description:
+          "Tracks spare-parts usage by site for restoration, PMR, and special tasks, with filters by spare type and monthly usage reports.",
+      },
+      {
+        name: "Fleet Map",
+        description:
+          "Built a live map of the ATMS sites inside TicketFlow that works across different devices, with color-coded pins by ticket status, site thumbnails, and on-map weather with a 6-hour peek.",
       },
     ],
   },
@@ -207,20 +217,30 @@ export const projects: Project[] = [
       {
         name: "Traffic Violation Manager (TVM)",
         description:
-          "Segregates violation XMLs and media by site, type, and lane. Includes EXIF extraction, video playback, and Excel/PowerPoint exports.",
+          "Simplifies case review by organizing violation files and media by site, type, and lane, with photo and video playback, EXIF verification, and Excel and one-page PDF reports.",
       },
       {
         name: "Hardware Serial Manager (HSM)",
         description:
-          "Parses hardware configurations into searchable CSV inventory with duplicate detection.",
+          "Scrapes cabinet serials into the inventory for easier tracking, then syncs the confirmed update to Drive without duplicate rows.",
       },
       {
         name: "SMART Drive Health Monitor",
         description:
           "PowerShell-based field tool for remote SMART health monitoring of HDDs and SSDs on ATMS devices via SSH. Collects drive health data, detects issues, provides replacement recommendations, and generates XML reports.",
       },
+      {
+        name: "Spare Usage",
+        description:
+          "Tracks spare-parts usage by site for restoration, PMR, and special tasks, with filters by spare type and monthly usage reports.",
+      },
+      {
+        name: "Fleet Map",
+        description:
+          "Built a live map of the ATMS sites inside TicketFlow that works across different devices, with color-coded pins by ticket status, site thumbnails, and on-map weather with a 6-hour peek.",
+      },
     ],
-    technologies: ["Python", "GUI", "CSV/Excel", "Geospatial Analysis", "PowerPoint Export"],
+    technologies: ["Python", "GUI", "CSV/Excel", "Geospatial Analysis", "PDF reports"],
   },
 ];
 
