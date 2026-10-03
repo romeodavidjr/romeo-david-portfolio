@@ -27,9 +27,9 @@ export default function Hero() {
             {siteConfig.name}
           </h1>
           <p className="mt-4 max-w-xl animate-fade-in-up animation-delay-200 text-base font-semibold leading-snug text-accent-blue opacity-0 sm:mt-5 sm:text-xl sm:leading-snug">
-            {siteConfig.title.split(" | ").map((part) => (
+            {siteConfig.title.split(" | ").map((part, i) => (
               <span key={part} className="block">
-                {part}
+                {i === 0 ? `${part} |` : part}
               </span>
             ))}
           </p>
