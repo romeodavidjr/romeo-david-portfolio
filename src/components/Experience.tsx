@@ -86,7 +86,7 @@ export default function Experience() {
                           <p className="text-sm font-semibold leading-snug text-text">
                             {tool.name}
                           </p>
-                          <p className="mt-1.5 text-xs leading-relaxed break-words text-text-dim">
+                          <p className="mt-1.5 text-sm leading-relaxed break-words text-text-muted">
                             {tool.description}
                           </p>
                         </div>

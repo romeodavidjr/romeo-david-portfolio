@@ -80,7 +80,7 @@ export default function Projects() {
                             {item.name}
                           </p>
                           {item.description && (
-                            <p className="mt-1.5 text-xs leading-relaxed text-text-dim sm:text-[13px]">
+                            <p className="mt-1.5 text-sm leading-relaxed text-text-muted">
                               {item.description}
                             </p>
                           )}
