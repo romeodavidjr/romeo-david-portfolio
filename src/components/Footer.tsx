@@ -3,20 +3,17 @@ import { navLinks, siteConfig } from "@/data/portfolio";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border/80 bg-bg py-10">
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+    <footer className="border-t border-border bg-bg pt-14 pb-10">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-5 sm:px-8 lg:px-12">
+        <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <div>
             <a
               href="#home"
-              className="flex items-center gap-2 text-lg font-bold text-text"
+              className="font-display text-4xl leading-none text-text sm:text-5xl"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-dim text-xs font-bold text-accent ring-1 ring-accent/30">
-                RD
-              </span>
               {siteConfig.name}
             </a>
-            <p className="mt-2 max-w-sm text-sm text-text-dim">
+            <p className="label-mono mt-4">
               Senior Telecommunications Engineer · Data & Automation Team Lead
             </p>
           </div>
@@ -24,37 +21,37 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <a
               href={`mailto:${siteConfig.email}`}
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-border text-text-muted transition duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent-dim hover:text-accent hover:shadow-[0_0_16px_-4px_rgba(45,212,191,0.4)]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border-strong text-text-muted transition hover:border-accent hover:text-accent"
               aria-label="Email"
             >
-              <Mail size={18} />
+              <Mail size={17} />
             </a>
             <a
               href={siteConfig.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-border text-text-muted transition duration-300 hover:-translate-y-0.5 hover:border-accent-blue/40 hover:bg-accent-blue-dim hover:text-accent-blue hover:shadow-[0_0_16px_-4px_rgba(56,189,248,0.35)]"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border-strong text-text-muted transition hover:border-accent hover:text-accent"
               aria-label="LinkedIn"
             >
-              <Linkedin size={18} />
+              <Linkedin size={17} />
             </a>
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-x-5 gap-y-2">
+        <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-3">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-text-dim transition hover:text-accent"
+              className="font-mono text-[11px] tracking-[0.12em] text-text-dim uppercase transition hover:text-text"
             >
               {link.label}
             </a>
           ))}
-        </div>
+        </nav>
 
         <div className="border-t border-border pt-6">
-          <p className="text-center text-sm text-text-dim">
+          <p className="text-sm text-text-dim">
             © {siteConfig.copyrightYear} {siteConfig.copyrightName}
           </p>
         </div>

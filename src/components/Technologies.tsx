@@ -11,6 +11,7 @@ import {
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
+import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import ScrollReveal from "./ScrollReveal";
 import { technologies } from "@/data/portfolio";
@@ -30,40 +31,44 @@ const iconMap: Record<string, LucideIcon> = {
 
 export default function Technologies() {
   return (
-    <section
-      id="technologies"
-      className="scroll-mt-20 border-t border-border/80 bg-bg-elevated/40 py-16 sm:py-20"
-    >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal>
-          <SectionHeading
-            eyebrow="Technologies"
-            title="Tools & platforms"
-            description="Technologies used across telecom operations, automation, analytics, and modern web development."
-          />
-        </ScrollReveal>
+    <Section id="technologies">
+      <ScrollReveal>
+        <SectionHeading
+          index="05"
+          eyebrow="Technologies"
+          title="Tools & platforms"
+          description="Technologies used across telecom operations, automation, analytics, and modern web development."
+        />
+      </ScrollReveal>
 
-        <ScrollReveal delay={80}>
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
-            {technologies.map((tech) => {
-              const Icon = iconMap[tech.icon] ?? Code2;
-              return (
-                <div
-                  key={tech.name}
-                  className="card-surface group flex flex-col items-center justify-center gap-2.5 px-3 py-5 text-center"
-                >
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-dim text-accent ring-1 ring-accent/20 transition duration-300 group-hover:ring-accent/45 group-hover:shadow-[0_0_16px_-4px_rgba(45,212,191,0.4)]">
-                    <Icon size={20} strokeWidth={1.75} />
+      <ScrollReveal delay={80}>
+        <ul className="grid list-none grid-cols-2 border-t border-l border-border p-0 md:grid-cols-5">
+          {technologies.map((tech, i) => {
+            const Icon = iconMap[tech.icon] ?? Code2;
+            return (
+              <li
+                key={tech.name}
+                className="row-link flex min-h-[8.5rem] flex-col justify-between gap-6 border-r border-b border-border p-4 sm:min-h-[9.5rem] sm:p-5"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="row-index label-mono transition-colors" aria-hidden>
+                    {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-xs font-medium leading-snug text-text-muted transition duration-300 group-hover:text-text sm:text-sm">
-                    {tech.name}
-                  </span>
+                  <Icon
+                    size={17}
+                    strokeWidth={1.5}
+                    className="text-text-dim"
+                    aria-hidden
+                  />
                 </div>
-              );
-            })}
-          </div>
-        </ScrollReveal>
-      </div>
-    </section>
+                <span className="text-[0.95rem] font-medium leading-snug text-text sm:text-base">
+                  {tech.name}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+      </ScrollReveal>
+    </Section>
   );
 }

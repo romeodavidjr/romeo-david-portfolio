@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { navLinks, siteConfig } from "@/data/portfolio";
+import { navLinks } from "@/data/portfolio";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -40,25 +40,27 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300 ${
         scrolled || open
-          ? "border-b border-border bg-bg/90 shadow-lg shadow-black/20 backdrop-blur-xl"
-          : "bg-transparent"
+          ? "border-b border-border bg-bg/85 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:h-[4.5rem] sm:px-6 lg:px-8">
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:h-[4.5rem] sm:px-8 lg:px-12">
         <a
           href="#home"
-          className="group flex items-center gap-2 text-lg font-bold tracking-tight text-text"
+          className="group flex items-center gap-3 text-text"
           onClick={handleNav}
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-dim text-sm font-bold text-accent ring-1 ring-accent/30 transition group-hover:ring-accent/60">
+          <span className="font-display flex h-9 w-9 items-center justify-center rounded-full border border-border-strong text-[1.05rem] leading-none text-text transition group-hover:border-accent">
             RD
           </span>
-          <span className="hidden sm:inline">Romeo David Jr.</span>
+          <span className="hidden text-sm font-medium tracking-tight sm:inline">
+            Romeo David Jr.
+          </span>
         </a>
 
-        <ul className="hidden items-center gap-0.5 lg:flex">
+        <ul className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => {
             const id = link.href.slice(1);
             const isActive = active === id;
@@ -66,13 +68,18 @@ export default function Navbar() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className={`rounded-lg px-2.5 py-2 text-[13px] font-medium transition-colors xl:px-3 xl:text-sm ${
-                    isActive
-                      ? "bg-accent-dim text-accent"
-                      : "text-text-muted hover:bg-bg-card hover:text-text"
+                  aria-current={isActive ? "true" : undefined}
+                  className={`relative px-2 py-2 font-mono text-[11px] tracking-[0.12em] uppercase transition-colors xl:px-3 ${
+                    isActive ? "text-text" : "text-text-dim hover:text-text"
                   }`}
                 >
                   {link.label}
+                  <span
+                    className={`absolute inset-x-2 -bottom-0.5 h-px bg-accent transition-opacity xl:inset-x-3 ${
+                      isActive ? "opacity-100" : "opacity-0"
+                    }`}
+                    aria-hidden
+                  />
                 </a>
               </li>
             );
@@ -81,51 +88,54 @@ export default function Navbar() {
 
         <a
           href="#contact"
-          className="btn btn-primary hidden !px-4 !py-2 text-sm lg:inline-flex"
+          className="btn btn-ghost hidden !px-4 !py-2 text-[13px] lg:inline-flex"
         >
           Get in Touch
         </a>
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-lg p-2 text-text-muted transition hover:bg-bg-card hover:text-text lg:hidden"
+          className="inline-flex items-center justify-center rounded-full border border-border-strong p-2 text-text transition hover:border-border-hover lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
 
       {/* Mobile menu */}
       <div
-        className={`border-t border-border bg-bg/95 backdrop-blur-xl transition-all duration-300 lg:hidden ${
+        className={`border-t border-border bg-bg/95 backdrop-blur-md transition-all duration-300 lg:hidden ${
           open
-            ? "max-h-[min(100vh,560px)] overflow-y-auto opacity-100"
+            ? "max-h-[min(100vh,600px)] overflow-y-auto opacity-100"
             : "pointer-events-none max-h-0 overflow-hidden opacity-0"
         }`}
       >
-        <ul className="flex flex-col gap-1 px-4 py-4">
-          {navLinks.map((link) => {
+        <ul className="flex flex-col px-5 py-4 sm:px-8">
+          {navLinks.map((link, i) => {
             const id = link.href.slice(1);
             const isActive = active === id;
             return (
-              <li key={link.href}>
+              <li key={link.href} className="border-b border-border last:border-b-0">
                 <a
                   href={link.href}
                   onClick={handleNav}
-                  className={`block rounded-lg px-4 py-3 text-base font-medium transition-colors ${
-                    isActive
-                      ? "bg-accent-dim text-accent"
-                      : "text-text-muted hover:bg-bg-card hover:text-text"
+                  className={`flex items-baseline gap-4 py-3.5 transition-colors ${
+                    isActive ? "text-text" : "text-text-muted hover:text-text"
                   }`}
                 >
-                  {link.label}
+                  <span className="label-mono w-6" aria-hidden>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="font-display text-2xl leading-none">
+                    {link.label}
+                  </span>
                 </a>
               </li>
             );
           })}
-          <li className="pt-2">
+          <li className="pt-4">
             <a
               href="#contact"
               onClick={handleNav}

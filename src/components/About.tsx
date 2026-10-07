@@ -1,47 +1,50 @@
+import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import ScrollReveal from "./ScrollReveal";
 import { about } from "@/data/portfolio";
 
 export default function About() {
   return (
-    <section id="about" className="scroll-mt-20 py-16 sm:py-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal>
-          <SectionHeading
-            eyebrow="About Me"
-            title="Engineering excellence in telecom & automation"
-            description="A career built on operational reliability, multi-vendor expertise, and practical automation."
-          />
-        </ScrollReveal>
+    <Section id="about">
+      <ScrollReveal>
+        <SectionHeading
+          index="01"
+          eyebrow="About Me"
+          title="Engineering excellence in telecom & automation"
+          description="A career built on operational reliability, multi-vendor expertise, and practical automation."
+        />
+      </ScrollReveal>
 
-        <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-10">
+      <div className="grid gap-12 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] lg:gap-12">
+        <div className="hidden lg:block" aria-hidden />
+        <div className="grid gap-12 xl:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] xl:gap-16">
           <ScrollReveal delay={100}>
-            <div className="space-y-4 text-[0.95rem] leading-relaxed text-text-muted sm:text-base md:text-[1.05rem]">
+            <div className="space-y-6 text-[1.0625rem] leading-[1.75] text-text-body sm:text-lg">
               {about.paragraphs.map((p, i) => (
-                <p key={i}>{p}</p>
+                <p key={i} className={i === 0 ? "text-text" : undefined}>
+                  {p}
+                </p>
               ))}
             </div>
           </ScrollReveal>
 
           <ScrollReveal delay={200}>
-            <div className="grid grid-cols-2 gap-3">
+            <dl className="grid grid-cols-2 border-t border-l border-border">
               {about.highlights.map((item) => (
                 <div
                   key={item.label}
-                  className="card-surface p-4 sm:p-5"
+                  className="flex flex-col gap-3 border-r border-b border-border p-5 sm:p-6"
                 >
-                  <p className="text-2xl font-extrabold tracking-tight text-accent sm:text-3xl">
+                  <dt className="label-mono">{item.label}</dt>
+                  <dd className="font-display order-first m-0 text-[2.75rem] leading-none text-text sm:text-5xl">
                     {item.value}
-                  </p>
-                  <p className="mt-1 text-xs font-medium text-text-dim sm:text-sm">
-                    {item.label}
-                  </p>
+                  </dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </ScrollReveal>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

@@ -1,112 +1,125 @@
-import { Calendar, Code2, Wrench } from "lucide-react";
+import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import ScrollReveal from "./ScrollReveal";
 import { projects } from "@/data/portfolio";
 
+/** Projects as full-width "case records" with numbered editorial lists. */
 export default function Projects() {
   return (
-    <section id="projects" className="scroll-mt-20 py-16 sm:py-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal>
-          <SectionHeading
-            eyebrow="Projects"
-            title="Selected work"
-            description="Automation systems and tools that improve field operations, reporting, and decision-making."
-          />
-        </ScrollReveal>
+    <Section id="projects">
+      <ScrollReveal>
+        <SectionHeading
+          index="04"
+          eyebrow="Projects"
+          title="Selected work"
+          description="Automation systems and tools that improve field operations, reporting, and decision-making."
+        />
+      </ScrollReveal>
 
-        <div className="grid gap-5 lg:grid-cols-2">
-          {projects.map((project, index) => (
-            <ScrollReveal key={project.title} delay={index * 90}>
-              <article className="card-surface group flex h-full flex-col p-5 sm:p-7">
-                <div className="mb-4 flex items-start justify-between gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-dim text-accent ring-1 ring-accent/25 transition duration-300 group-hover:ring-accent/50 group-hover:shadow-[0_0_16px_-4px_rgba(45,212,191,0.45)]">
-                    {index === 0 ? <Code2 size={21} /> : <Wrench size={21} />}
+      <div className="flex flex-col gap-8 sm:gap-10">
+        {projects.map((project, index) => {
+          const caseNo = String(index + 1).padStart(2, "0");
+          const list = project.features
+            ? {
+                heading: "Key capabilities",
+                rows: project.features.map((f) => ({ name: f, description: undefined as string | undefined })),
+              }
+            : project.items
+              ? { heading: "Tool suite", rows: project.items }
+              : null;
+
+          return (
+            <ScrollReveal key={project.title} delay={60}>
+              <article className="panel panel-hover overflow-hidden">
+                {/* Record header */}
+                <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-border px-5 py-4 sm:px-8 lg:px-10">
+                  <div className="flex items-center gap-3">
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
+                    <span className="label-mono !text-text">Case {caseNo}</span>
                   </div>
-                  {project.period && (
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-bg/40 px-2.5 py-1 text-xs text-text-dim">
-                      <Calendar size={12} />
-                      {project.period}
-                    </span>
-                  )}
+                  {project.period ? (
+                    <span className="label-mono">{project.period}</span>
+                  ) : null}
                 </div>
 
-                <h3 className="text-lg font-bold text-text sm:text-xl">
-                  {project.title}
-                </h3>
-                {project.subtitle && (
-                  <p className="mt-1 text-sm font-medium text-accent-blue">
-                    {project.subtitle}
-                  </p>
-                )}
-                <p className="mt-3 text-sm leading-relaxed text-text-muted sm:text-[0.95rem]">
-                  {project.description}
-                </p>
-
-                {project.features && (
-                  <div className="mt-5">
-                    <p className="mb-2.5 text-xs font-semibold tracking-wide text-accent uppercase">
-                      Key capabilities
+                <div className="grid gap-10 px-5 py-8 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] lg:gap-14 lg:px-10 lg:py-12">
+                  {/* Summary */}
+                  <div className="min-w-0">
+                    <h3 className="font-display text-[2.6rem] leading-none text-text sm:text-6xl">
+                      {project.title}
+                    </h3>
+                    {project.subtitle ? (
+                      <p className="mt-4 text-base font-medium leading-snug text-accent sm:text-lg">
+                        {project.subtitle}
+                      </p>
+                    ) : null}
+                    <p className="mt-5 text-[0.98rem] leading-relaxed text-text-body sm:text-[1.0625rem]">
+                      {project.description}
                     </p>
-                    <ul className="space-y-2.5">
-                      {project.features.map((feature) => (
-                        <li
-                          key={feature}
-                          className="flex gap-2.5 text-sm leading-relaxed text-text-muted"
-                        >
-                          <span
-                            className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent shadow-[0_0_6px_rgba(45,212,191,0.55)]"
-                            aria-hidden
-                          />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
+
+                    {project.technologies ? (
+                      <div className="mt-8 border-t border-border pt-5">
+                        <p className="label-mono mb-3">Stack</p>
+                        <ul className="flex list-none flex-wrap gap-2 p-0">
+                          {project.technologies.map((tech) => (
+                            <li
+                              key={tech}
+                              className="rounded-full border border-border-strong px-3 py-1 font-mono text-[11.5px] tracking-wide text-text-muted"
+                            >
+                              {tech}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
                   </div>
-                )}
 
-                {project.items && (
-                  <div className="mt-5">
-                    <p className="mb-2.5 text-xs font-semibold tracking-wide text-accent uppercase">
-                      Tool suite
-                    </p>
-                    <div className="space-y-2.5">
-                      {project.items.map((item) => (
-                        <div
-                          key={item.name}
-                          className="card-nested px-3.5 py-3.5"
-                        >
-                          <p className="text-sm font-semibold text-text">
-                            {item.name}
-                          </p>
-                          {item.description && (
-                            <p className="mt-1.5 text-sm leading-relaxed text-text-muted">
-                              {item.description}
-                            </p>
-                          )}
-                        </div>
-                      ))}
+                  {/* Numbered list */}
+                  {list ? (
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-3">
+                        <p className="label-mono">{list.heading}</p>
+                        <span className="h-px flex-1 bg-border" aria-hidden />
+                        <span className="label-mono">
+                          {String(list.rows.length).padStart(2, "0")}
+                        </span>
+                      </div>
+                      <ol className="mt-2 list-none p-0">
+                        {list.rows.map((row, r) => (
+                          <li
+                            key={row.name}
+                            className="row-link grid grid-cols-[2.25rem_minmax(0,1fr)] gap-3 border-b border-border py-4 last:border-b-0 sm:grid-cols-[2.75rem_minmax(0,1fr)] sm:py-5"
+                          >
+                            <span className="row-index font-display text-xl leading-none text-text-dim transition-colors sm:text-2xl">
+                              {String(r + 1).padStart(2, "0")}
+                            </span>
+                            <div className="min-w-0">
+                              <p
+                                className={
+                                  row.description
+                                    ? "text-[0.98rem] font-semibold leading-snug text-text sm:text-base"
+                                    : "text-[0.98rem] leading-relaxed text-text-body sm:text-base"
+                                }
+                              >
+                                {row.name}
+                              </p>
+                              {row.description ? (
+                                <p className="mt-1.5 text-sm leading-relaxed text-text-muted sm:text-[0.95rem]">
+                                  {row.description}
+                                </p>
+                              ) : null}
+                            </div>
+                          </li>
+                        ))}
+                      </ol>
                     </div>
-                  </div>
-                )}
-
-                {project.technologies && (
-                  <div className="mt-auto flex flex-wrap gap-2 border-t border-border/60 pt-5">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-md bg-accent-blue-dim px-2.5 py-1 text-xs font-medium text-accent-blue ring-1 ring-accent-blue/20"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                  ) : null}
+                </div>
               </article>
             </ScrollReveal>
-          ))}
-        </div>
+          );
+        })}
       </div>
-    </section>
+    </Section>
   );
 }

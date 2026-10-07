@@ -1,65 +1,61 @@
-import { MapPin, Wrench } from "lucide-react";
+import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import ScrollReveal from "./ScrollReveal";
 import { experience } from "@/data/portfolio";
 
 /**
- * Experience — stacked cards only.
- * No timeline line, dots, left rail, absolute markers, or pseudo-elements.
+ * Experience — editorial ledger.
+ * Horizontal hairlines only: no timeline line, dots, left rail or markers.
  */
 export default function Experience() {
   return (
-    <section
-      id="experience"
-      className="scroll-mt-20 border-t border-border/80 bg-bg-elevated/50 py-16 sm:py-20"
-    >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <ScrollReveal>
-          <SectionHeading
-            eyebrow="Experience"
-            title="Professional journey"
-            description="Two decades of leadership across telecom operations, public safety networks, and automation."
-          />
-        </ScrollReveal>
+    <Section id="experience">
+      <ScrollReveal>
+        <SectionHeading
+          index="03"
+          eyebrow="Experience"
+          title="Professional journey"
+          description="Two decades of leadership across telecom operations, public safety networks, and automation."
+        />
+      </ScrollReveal>
 
-        {/* Stacked role cards — no timeline chrome of any kind */}
-        <div className="experience-stack flex w-full flex-col gap-8 sm:gap-9 lg:gap-10">
-          {experience.map((job, index) => (
-            <ScrollReveal key={job.company} delay={index * 60} className="w-full">
-              <article className="card-surface experience-card relative w-full p-5 sm:p-6 lg:p-8">
-                <div className="flex flex-col gap-3 border-b border-border/70 pb-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:pb-5">
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-base font-bold leading-snug text-text sm:text-lg lg:text-xl">
-                      {job.role}
-                    </h3>
-                    <p className="mt-1.5 text-sm font-semibold text-accent sm:text-base">
-                      {job.company}
-                    </p>
-                    {job.companyNote ? (
-                      <p className="mt-1.5 max-w-2xl text-xs leading-relaxed text-text-dim sm:text-[13px]">
-                        {job.companyNote}
-                      </p>
-                    ) : null}
-                  </div>
-                  <div className="flex shrink-0 flex-col gap-1.5 sm:items-end sm:text-right">
-                    <span className="inline-flex w-fit rounded-full bg-accent-dim px-3 py-1 text-[11px] font-semibold tracking-wide text-accent ring-1 ring-accent/25 sm:text-xs">
-                      {job.period}
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-xs text-text-dim">
-                      <MapPin size={12} aria-hidden />
-                      {job.location}
-                    </span>
-                  </div>
-                </div>
+      <div className="experience-stack flex w-full flex-col border-t border-border">
+        {experience.map((job, index) => (
+          <ScrollReveal key={job.company} delay={60} className="w-full">
+            <article className="grid w-full gap-6 border-b border-border py-10 sm:py-12 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] lg:gap-12 lg:py-14">
+              {/* Meta column */}
+              <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2 lg:flex-col lg:gap-3">
+                <span className="label-mono !text-accent" aria-hidden>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <p className="font-mono text-[13px] tracking-wide text-text">
+                  {job.period}
+                </p>
+                <p className="label-mono">{job.location}</p>
+              </div>
 
-                <ul className="mt-4 list-none space-y-2.5 p-0 sm:mt-5 sm:space-y-3">
+              {/* Body */}
+              <div className="min-w-0">
+                <h3 className="font-display text-[1.85rem] leading-[1.08] text-text sm:text-4xl lg:text-[2.6rem]">
+                  {job.role}
+                </h3>
+                <p className="mt-3 text-base font-medium text-accent sm:text-[1.0625rem]">
+                  {job.company}
+                </p>
+                {job.companyNote ? (
+                  <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-text-dim">
+                    {job.companyNote}
+                  </p>
+                ) : null}
+
+                <ul className="mt-7 max-w-3xl list-none space-y-4 p-0">
                   {job.bullets.map((bullet, i) => (
                     <li
                       key={i}
-                      className="flex gap-3 text-sm leading-relaxed text-text-muted sm:text-[0.95rem]"
+                      className="grid grid-cols-[1.25rem_minmax(0,1fr)] gap-3 text-[0.98rem] leading-relaxed text-text-body sm:text-[1.0625rem]"
                     >
                       <span
-                        className="mt-2 inline-block h-1 w-1 shrink-0 rounded-full bg-accent-blue"
+                        className="mt-[0.8em] h-px w-3 bg-text-dim"
                         aria-hidden
                       />
                       <span className="min-w-0">{bullet}</span>
@@ -68,37 +64,41 @@ export default function Experience() {
                 </ul>
 
                 {job.nestedTools && job.nestedTools.length > 0 ? (
-                  <div className="mt-5 w-full rounded-xl border border-accent/15 bg-bg/40 p-4 sm:mt-6 sm:p-5">
-                    <div className="mb-3 flex items-center gap-2">
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent-dim text-accent ring-1 ring-accent/20">
-                        <Wrench size={14} aria-hidden />
+                  <div className="mt-10">
+                    <div className="mb-1 flex items-center gap-3">
+                      <p className="label-mono">Custom automation tools</p>
+                      <span className="h-px flex-1 bg-border" aria-hidden />
+                      <span className="label-mono">
+                        {String(job.nestedTools.length).padStart(2, "0")}
                       </span>
-                      <p className="text-xs font-semibold tracking-wide text-accent uppercase sm:text-[13px]">
-                        Custom automation tools
-                      </p>
                     </div>
-                    <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
-                      {job.nestedTools.map((tool) => (
-                        <div
+                    <ol className="grid list-none grid-cols-1 p-0 md:grid-cols-2 md:gap-x-10">
+                      {job.nestedTools.map((tool, t) => (
+                        <li
                           key={tool.name}
-                          className="card-nested min-w-0 break-words p-3.5 sm:p-4"
+                          className="grid min-w-0 grid-cols-[2.25rem_minmax(0,1fr)] gap-3 border-b border-border py-5"
                         >
-                          <p className="text-sm font-semibold leading-snug text-text">
-                            {tool.name}
-                          </p>
-                          <p className="mt-1.5 text-sm leading-relaxed break-words text-text-muted">
-                            {tool.description}
-                          </p>
-                        </div>
+                          <span className="label-mono pt-1" aria-hidden>
+                            T{String(t + 1).padStart(2, "0")}
+                          </span>
+                          <div className="min-w-0">
+                            <p className="text-[0.98rem] font-semibold leading-snug text-text">
+                              {tool.name}
+                            </p>
+                            <p className="mt-1.5 text-sm leading-relaxed break-words text-text-muted sm:text-[0.95rem]">
+                              {tool.description}
+                            </p>
+                          </div>
+                        </li>
                       ))}
-                    </div>
+                    </ol>
                   </div>
                 ) : null}
-              </article>
-            </ScrollReveal>
-          ))}
-        </div>
+              </div>
+            </article>
+          </ScrollReveal>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

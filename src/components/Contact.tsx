@@ -1,14 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import {
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-  CheckCircle2,
-} from "lucide-react";
+import { ArrowUpRight, Send, CheckCircle2 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import ScrollReveal from "./ScrollReveal";
 import { siteConfig } from "@/data/portfolio";
@@ -35,100 +28,89 @@ export default function Contact() {
     form.reset();
   };
 
-  const contactCardClass =
-    "card-surface flex items-start gap-4 p-4 sm:p-5";
+  const rowClass =
+    "group grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1.5 border-b border-border py-5 sm:grid-cols-[7rem_minmax(0,1fr)_auto] sm:py-6";
 
   return (
     <section
       id="contact"
-      className="scroll-mt-20 border-t border-border/80 bg-bg-elevated/50 py-16 sm:py-20"
+      className="stage-light-low relative scroll-mt-20 pt-14 pb-20 sm:pt-20 sm:pb-24 lg:pt-24 lg:pb-32"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+        <div className="rule-fade mb-10 sm:mb-14" aria-hidden />
         <ScrollReveal>
           <SectionHeading
+            index="08"
             eyebrow="Contact"
             title="Let's connect"
             description="Open to opportunities, collaborations, and technical discussions."
           />
         </ScrollReveal>
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:gap-10">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16">
           <ScrollReveal delay={80}>
-            <div className="space-y-3.5">
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className={contactCardClass}
-              >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-dim text-accent ring-1 ring-accent/25">
-                  <Mail size={19} />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-text-dim">Email</p>
-                  <p className="mt-0.5 text-base font-semibold text-text break-all">
-                    {siteConfig.email}
-                  </p>
-                </div>
+            <div className="border-t border-border">
+              <a href={`mailto:${siteConfig.email}`} className={rowClass}>
+                <span className="label-mono col-span-2 sm:col-span-1">Email</span>
+                <span className="min-w-0 text-base font-medium break-all text-text transition-colors group-hover:text-accent sm:text-lg">
+                  {siteConfig.email}
+                </span>
+                <ArrowUpRight
+                  size={16}
+                  className="text-text-dim transition-colors group-hover:text-accent"
+                  aria-hidden
+                />
               </a>
 
               <a
                 href={siteConfig.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={contactCardClass}
+                className={rowClass}
               >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-blue-dim text-accent-blue ring-1 ring-accent-blue/25">
-                  <Linkedin size={19} />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-text-dim">LinkedIn</p>
-                  <p className="mt-0.5 text-base font-semibold text-text">
-                    {siteConfig.linkedinDisplay}
-                  </p>
-                </div>
+                <span className="label-mono col-span-2 sm:col-span-1">LinkedIn</span>
+                <span className="min-w-0 text-base font-medium break-words text-text transition-colors group-hover:text-accent sm:text-lg">
+                  {siteConfig.linkedinDisplay}
+                </span>
+                <ArrowUpRight
+                  size={16}
+                  className="text-text-dim transition-colors group-hover:text-accent"
+                  aria-hidden
+                />
               </a>
 
-              <div className={`${contactCardClass} hover:transform-none`}>
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-dim text-accent ring-1 ring-accent/25">
-                  <MapPin size={19} />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-text-dim">Location</p>
-                  <p className="mt-0.5 text-base font-semibold text-text">
-                    {siteConfig.location}
-                  </p>
-                </div>
+              <div className={rowClass}>
+                <span className="label-mono col-span-2 sm:col-span-1">Location</span>
+                <span className="min-w-0 text-base font-medium text-text sm:text-lg">
+                  {siteConfig.location}
+                </span>
+                <span aria-hidden />
               </div>
 
               {siteConfig.phone ? (
                 <a
                   href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-                  className={contactCardClass}
+                  className={rowClass}
                 >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-blue-dim text-accent-blue ring-1 ring-accent-blue/25">
-                    <Phone size={19} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-text-dim">Phone</p>
-                    <p className="mt-0.5 text-base font-semibold text-text">
-                      {siteConfig.phone}
-                    </p>
-                  </div>
+                  <span className="label-mono col-span-2 sm:col-span-1">Phone</span>
+                  <span className="min-w-0 text-base font-medium text-text transition-colors group-hover:text-accent sm:text-lg">
+                    {siteConfig.phone}
+                  </span>
+                  <ArrowUpRight
+                    size={16}
+                    className="text-text-dim transition-colors group-hover:text-accent"
+                    aria-hidden
+                  />
                 </a>
               ) : null}
             </div>
           </ScrollReveal>
 
           <ScrollReveal delay={160}>
-            <form
-              onSubmit={handleSubmit}
-              className="card-surface-static p-5 sm:p-7"
-            >
-              <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+            <form onSubmit={handleSubmit} className="panel p-5 sm:p-8">
+              <div className="grid gap-5 sm:grid-cols-2">
                 <div className="sm:col-span-1">
-                  <label
-                    htmlFor="name"
-                    className="mb-1.5 block text-sm font-medium text-text-muted"
-                  >
+                  <label htmlFor="name" className="label-mono mb-2 block">
                     Name
                   </label>
                   <input
@@ -138,14 +120,11 @@ export default function Contact() {
                     required
                     autoComplete="name"
                     placeholder="Your name"
-                    className="w-full rounded-xl border border-border bg-bg px-4 py-2.5 text-sm text-text placeholder:text-text-dim outline-none transition duration-300 focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
+                    className="field"
                   />
                 </div>
                 <div className="sm:col-span-1">
-                  <label
-                    htmlFor="email"
-                    className="mb-1.5 block text-sm font-medium text-text-muted"
-                  >
+                  <label htmlFor="email" className="label-mono mb-2 block">
                     Email
                   </label>
                   <input
@@ -155,14 +134,11 @@ export default function Contact() {
                     required
                     autoComplete="email"
                     placeholder="you@example.com"
-                    className="w-full rounded-xl border border-border bg-bg px-4 py-2.5 text-sm text-text placeholder:text-text-dim outline-none transition duration-300 focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
+                    className="field"
                   />
                 </div>
                 <div className="sm:col-span-2">
-                  <label
-                    htmlFor="message"
-                    className="mb-1.5 block text-sm font-medium text-text-muted"
-                  >
+                  <label htmlFor="message" className="label-mono mb-2 block">
                     Message
                   </label>
                   <textarea
@@ -171,24 +147,27 @@ export default function Contact() {
                     required
                     rows={5}
                     placeholder="How can I help you?"
-                    className="w-full resize-y rounded-xl border border-border bg-bg px-4 py-2.5 text-sm text-text placeholder:text-text-dim outline-none transition duration-300 focus:border-accent/50 focus:ring-2 focus:ring-accent/20"
+                    className="field resize-y"
                   />
                 </div>
               </div>
 
-              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <button type="submit" className="btn btn-primary">
-                  <Send size={16} />
+                  <Send size={15} aria-hidden />
                   Send Message
                 </button>
                 {status === "sent" && (
-                  <p className="inline-flex items-center gap-2 text-sm text-accent">
-                    <CheckCircle2 size={16} />
+                  <p
+                    className="inline-flex items-center gap-2 text-sm text-accent"
+                    role="status"
+                  >
+                    <CheckCircle2 size={16} aria-hidden />
                     Opening your email client…
                   </p>
                 )}
               </div>
-              <p className="mt-3.5 text-xs text-text-dim">
+              <p className="mt-4 text-[13px] leading-relaxed text-text-dim">
                 Submitting opens your email client with a pre-filled message. No
                 data is stored on this site.
               </p>

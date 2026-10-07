@@ -1,101 +1,128 @@
-import { ArrowDown, Download, FolderKanban, Mail } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
 import { siteConfig } from "@/data/portfolio";
 
 /**
+ * KPI strip — figures mirror the O&M results stated in portfolio.ts
+ * (372 tickets, 97.6% YTD SLA, 22.1h MTTR, zero overdue, 100% restoration).
+ */
+const heroStats = [
+  { value: "372", label: "O&M tickets" },
+  { value: "97.6%", label: "YTD SLA compliance" },
+  { value: "22.1h", label: "Average MTTR" },
+  { value: "Zero", label: "Overdue tickets" },
+  { value: "100%", label: "Restoration rate" },
+];
+
+/**
  * Profile photo:
- * 1. Save your image as `public/profile.jpg` (lowercase .jpg recommended)
- * 2. Path is configured in `src/data/portfolio.ts` → siteConfig.profilePhoto
+ * Path is configured in `src/data/portfolio.ts` → siteConfig.profilePhoto
  */
 export default function Hero() {
   const photoSrc = siteConfig.profilePhoto;
+  const [titleLead, titleRest] = siteConfig.title.split(" | ");
+  const nameWords = siteConfig.name.split(" ");
+  const nameFirst = nameWords.slice(0, 2).join(" ");
+  const nameLast = nameWords.slice(2).join(" ");
 
   return (
     <section
       id="home"
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-mesh pt-20 pb-14 sm:pb-16"
+      className="stage-light relative overflow-hidden pt-24 pb-6 sm:pt-32 sm:pb-12 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-end lg:pt-36 lg:pb-16"
     >
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-35" />
-      <div className="pointer-events-none absolute top-1/4 right-0 h-80 w-80 rounded-full bg-accent/10 blur-3xl animate-pulse-glow" />
-      <div className="pointer-events-none absolute bottom-1/4 left-0 h-64 w-64 rounded-full bg-accent-blue/10 blur-3xl animate-pulse-glow animation-delay-300" />
+      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
+        <div className="grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16">
+          {/* Copy */}
+          <div className="order-2 min-w-0 lg:order-1">
+            <div className="animate-fade-in-up flex items-center gap-3 opacity-0">
+              <span
+                className="h-1.5 w-1.5 rounded-full bg-accent"
+                aria-hidden
+              />
+              <p className="label-mono">Portfolio</p>
+            </div>
 
-      <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.15fr_auto] lg:gap-14 lg:px-8">
-        <div className="order-2 lg:order-1">
-          <p className="mb-3 animate-fade-in-up text-xs font-semibold tracking-[0.2em] text-accent uppercase opacity-0 sm:text-sm">
-            Portfolio
-          </p>
-          <h1 className="animate-fade-in-up animation-delay-100 text-[2.35rem] font-extrabold leading-[1.08] tracking-tight text-text opacity-0 sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]">
-            {siteConfig.name}
-          </h1>
-          <p className="mt-4 max-w-xl animate-fade-in-up animation-delay-200 text-base font-semibold leading-snug text-accent-blue opacity-0 sm:mt-5 sm:text-xl sm:leading-snug">
-            {siteConfig.title.split(" | ").map((part, i) => (
-              <span key={part} className="block">
-                {i === 0 ? `${part} |` : part}
+            <h1 className="font-display animate-fade-in-up animation-delay-100 mt-6 text-[4.4rem] leading-[0.92] text-text opacity-0 sm:text-[5.5rem] lg:text-[6.25rem] xl:text-[7.25rem]">
+              <span className="block">{nameFirst}</span>
+              {nameLast ? (
+                <span className="block italic text-text-body">{nameLast}</span>
+              ) : null}
+            </h1>
+
+            <p className="animate-fade-in-up animation-delay-200 mt-8 text-[clamp(0.8rem,4.3vw,1.375rem)] leading-snug font-medium tracking-[-0.01em] text-text opacity-0 sm:mt-10">
+              <span className="block whitespace-nowrap">
+                {titleLead} <span className="text-accent">|</span>
               </span>
-            ))}
-          </p>
-          <p className="mt-4 max-w-xl animate-fade-in-up animation-delay-300 text-[0.95rem] leading-relaxed text-text-muted opacity-0 sm:mt-5 sm:text-lg">
-            {siteConfig.tagline}
-          </p>
+              {titleRest ? (
+                <span className="block whitespace-nowrap text-text-body">
+                  {titleRest}
+                </span>
+              ) : null}
+            </p>
 
-          <div className="mt-7 flex animate-fade-in-up animation-delay-400 flex-wrap gap-3 opacity-0 sm:mt-8">
-            <a href="#projects" className="btn btn-primary">
-              <FolderKanban size={17} strokeWidth={2.25} />
-              View Projects
-            </a>
-            <a href="#contact" className="btn btn-ghost">
-              <Mail size={17} strokeWidth={2.25} />
-              Contact
-            </a>
-            <a
-              href={siteConfig.cvPath}
-              download
-              className="btn btn-secondary"
-            >
-              <Download size={17} strokeWidth={2.25} />
-              Download CV
-            </a>
+            <p className="animate-fade-in-up animation-delay-300 mt-5 max-w-xl text-base leading-relaxed text-text-muted opacity-0 sm:text-lg">
+              {siteConfig.tagline}
+            </p>
+
+            <div className="animate-fade-in-up animation-delay-400 mt-9 flex flex-wrap gap-3 opacity-0">
+              <a href="#projects" className="btn btn-primary">
+                View Projects
+                <ArrowUpRight size={16} strokeWidth={2} aria-hidden />
+              </a>
+              <a href="#contact" className="btn btn-ghost">
+                Contact
+              </a>
+              <a href={siteConfig.cvPath} download className="btn btn-ghost">
+                <Download size={16} strokeWidth={2} aria-hidden />
+                Download CV
+              </a>
+            </div>
           </div>
 
-          <div className="mt-8 animate-fade-in-up animation-delay-500 opacity-0 sm:mt-9">
-            <a
-              href="#about"
-              className="inline-flex items-center gap-2 text-sm text-text-dim transition-colors duration-300 hover:text-accent"
-            >
-              Scroll to explore
-              <ArrowDown size={15} className="animate-bounce" />
-            </a>
-          </div>
-        </div>
-
-        {/* Profile photo */}
-        <div className="order-1 flex justify-center animate-fade-in-up animation-delay-200 opacity-0 lg:order-2 lg:justify-end">
-          <div className="relative">
-            {/* Soft multi-layer glow behind photo */}
-            <div
-              className="pointer-events-none absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-accent/30 via-accent-blue/15 to-transparent blur-2xl animate-photo-glow"
-              aria-hidden
-            />
-            <div
-              className="pointer-events-none absolute -inset-3 rounded-[1.75rem] bg-gradient-to-tr from-accent/20 to-accent-blue/20 opacity-70 blur-xl"
-              aria-hidden
-            />
-            <div className="relative h-52 w-52 overflow-hidden rounded-[1.35rem] border border-accent/20 bg-bg-card shadow-[0_20px_50px_-15px_rgba(0,0,0,0.7),0_0_40px_-12px_rgba(45,212,191,0.35)] ring-1 ring-white/5 sm:h-64 sm:w-64 lg:h-[17.5rem] lg:w-[17.5rem]">
+          {/* Portrait */}
+          <figure className="animate-fade-in-up animation-delay-200 order-1 m-0 opacity-0 lg:order-2">
+            <div className="portrait-frame aspect-[4/3] w-full sm:aspect-[16/10] lg:aspect-[4/5] lg:w-[21rem] xl:w-[24rem]">
               {/* eslint-disable-next-line @next/next/no-img-element -- plain img avoids optimizer 500s if sharp/path fails */}
               <img
                 src={photoSrc}
                 alt={siteConfig.name}
-                className="h-full w-full object-cover"
-                width={288}
-                height={288}
+                className="h-full w-full object-cover object-[50%_28%]"
+                width={1248}
+                height={832}
                 decoding="async"
                 fetchPriority="high"
               />
-              <div
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg/35 via-transparent to-white/5"
-                aria-hidden
-              />
             </div>
-          </div>
+            <figcaption className="mt-3 flex items-center justify-between gap-4">
+              <span className="label-mono">{siteConfig.location}</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        {/* KPI strip */}
+        <dl className="animate-fade-in-up animation-delay-500 mt-14 grid grid-cols-2 border-t border-border opacity-0 sm:mt-20 sm:grid-cols-3 lg:grid-cols-5">
+          {heroStats.map((stat, i) => (
+            <div
+              key={stat.label}
+              className={`flex flex-col gap-3 border-b border-border py-6 pr-4 sm:py-7 lg:border-b-0 lg:pl-6 lg:first:pl-0 ${
+                i % 2 === 1 ? "pl-4 sm:pl-0" : ""
+              } ${i === heroStats.length - 1 ? "col-span-2 sm:col-span-1" : ""} lg:border-l lg:first:border-l-0`}
+            >
+              <dt className="label-mono">{stat.label}</dt>
+              <dd className="font-display order-first m-0 text-[2.75rem] leading-none text-text sm:text-5xl xl:text-[3.75rem]">
+                {stat.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+
+        <div className="animate-fade-in-up animation-delay-500 mt-8 hidden opacity-0 sm:block">
+          <a
+            href="#about"
+            className="label-mono inline-flex items-center gap-2 transition-colors hover:!text-text"
+          >
+            Scroll to explore
+            <ArrowDown size={13} aria-hidden />
+          </a>
         </div>
       </div>
     </section>
