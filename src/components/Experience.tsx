@@ -1,9 +1,44 @@
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import Section from "./Section";
 import ToolIcon from "./ToolIcon";
 import SectionHeading from "./SectionHeading";
 import ScrollReveal from "./ScrollReveal";
 import { experience } from "@/data/portfolio";
+
+/**
+ * Company logo tiles, keyed by the company name in portfolio.ts.
+ * `pad` keeps visual weight even across marks, stacked and wide wordmarks.
+ */
+const companyLogos: Record<
+  string,
+  { src: string; width: number; height: number; pad: string }
+> = {
+  "ASTEK Saudi Arabia Limited": {
+    src: "/logos/companies/astek.svg",
+    width: 37,
+    height: 38,
+    pad: "p-[9px] sm:p-2.5",
+  },
+  "Houssam Contracting Company (HCC)": {
+    src: "/logos/companies/hcc.png",
+    width: 137,
+    height: 147,
+    pad: "p-[7px] sm:p-2",
+  },
+  "SMART Communications, Inc.": {
+    src: "/logos/companies/smart.svg",
+    width: 147,
+    height: 106,
+    pad: "p-1.5 sm:p-[7px]",
+  },
+  "Philippine EDS Techno-service Inc. (Yazaki Affiliate)": {
+    src: "/logos/companies/yazaki.svg",
+    width: 250,
+    height: 36,
+    pad: "p-[3px] sm:p-1",
+  },
+};
 
 /**
  * Experience — editorial ledger.
@@ -25,7 +60,7 @@ export default function Experience() {
         {experience.map((job, index) => (
           <ScrollReveal key={job.company} delay={60} className="w-full">
             <article
-              className={`surface grid w-full gap-6 px-5 py-8 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,15.5rem)_minmax(0,1fr)] lg:gap-12 lg:px-10 lg:py-12 ${
+              className={`group/job surface grid w-full gap-6 px-5 py-8 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,15.5rem)_minmax(0,1fr)] lg:gap-12 lg:px-10 lg:py-12 ${
                 index === 0 ? "surface-light" : ""
               }`}
               style={
@@ -53,9 +88,29 @@ export default function Experience() {
                 <h3 className="font-display text-[1.85rem] leading-[1.08] text-text sm:text-4xl lg:text-[2.6rem]">
                   {job.role}
                 </h3>
-                <p className="mt-3 text-base font-medium text-accent sm:text-[1.0625rem]">
-                  {job.company}
-                </p>
+                {companyLogos[job.company] ? (
+                  <div className="mt-4 flex items-center gap-3.5">
+                    <span
+                      className={`grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-[background-color,border-color] duration-500 ease-out group-hover/job:border-white/70 group-hover/job:bg-[#f3f5f4] motion-reduce:transition-none sm:h-12 sm:w-12 ${companyLogos[job.company].pad}`}
+                    >
+                      <Image
+                        src={companyLogos[job.company].src}
+                        width={companyLogos[job.company].width}
+                        height={companyLogos[job.company].height}
+                        alt={`${job.company} logo`}
+                        unoptimized
+                        className="h-full w-full object-contain opacity-80 brightness-0 grayscale invert transition-[filter,opacity] duration-500 ease-out group-hover/job:opacity-100 group-hover/job:filter-none motion-reduce:transition-none"
+                      />
+                    </span>
+                    <p className="min-w-0 text-base font-medium text-accent sm:text-[1.0625rem]">
+                      {job.company}
+                    </p>
+                  </div>
+                ) : (
+                  <p className="mt-3 text-base font-medium text-accent sm:text-[1.0625rem]">
+                    {job.company}
+                  </p>
+                )}
                 {job.companyNote ? (
                   <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-text-dim">
                     {job.companyNote}
