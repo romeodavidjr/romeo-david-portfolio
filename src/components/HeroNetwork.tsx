@@ -1,9 +1,18 @@
 import type { CSSProperties } from "react";
+import HeroMotionPause from "./HeroMotionPause";
 
 /**
- * Faint telecom-style network behind the hero (inline SVG, CSS-animated
- * with transform/opacity only). Masked to fade out toward the name (left)
- * and the KPI strip (bottom). Detail layers are hidden on small screens.
+ * Telecom-style hero background (inline SVG, CSS-animated with
+ * transform/opacity only):
+ *  - faint network of sites (nodes) and links (lines)
+ *  - network pulses: soft points of light travel link by link along a few
+ *    routes, like data packets between sites; the receiving node glows
+ *    briefly when a pulse arrives
+ *  (the broadcasting tower lives in SignalWaves, next to the name)
+ * Masked to fade toward the name (left) and the KPI strip (bottom).
+ * Detail layers are hidden on phones; everything stops under
+ * prefers-reduced-motion (static lines and nodes only) and pauses while the
+ * hero is off-screen.
  */
 const nodes: [number, number][] = [
   [120, 90], [300, 40], [480, 130], [690, 60], [900, 140],
@@ -17,12 +26,44 @@ const edges: [number, number][] = [
 ];
 /** Edges hidden on phones to simplify the pattern */
 const detailEdges = new Set([3, 8, 12, 15, 17, 18, 19, 20]);
-const pulses = [2, 7, 11, 4];
-const travellers: { from: number; to: number; dur: string; delay: string }[] = [
-  { from: 5, to: 6, dur: "11s", delay: "0s" },
-  { from: 7, to: 8, dur: "13s", delay: "3s" },
-  { from: 11, to: 12, dur: "15s", delay: "6s" },
+
+/**
+ * Packet routes: three hops each. A hop takes `hop` seconds; the route
+ * repeats every 4 hops (3 travelling + 1 resting), so at most a few pulses
+ * are visible at once. `mobile: false` routes are hidden on phones.
+ */
+const routes: { path: number[]; hop: number; offset: number; mobile: boolean }[] = [
+  { path: [13, 5, 6, 7], hop: 5, offset: 0, mobile: true },
+  { path: [1, 2, 3, 4], hop: 6, offset: 2.5, mobile: true },
+  { path: [9, 8, 7, 3], hop: 5.5, offset: 7, mobile: false },
+  { path: [10, 11, 12, 9], hop: 7, offset: 4, mobile: false },
 ];
+
+type Hop = {
+  from: number;
+  to: number;
+  cycle: number;
+  delay: number;
+  mobile: boolean;
+};
+
+const hops: Hop[] = routes.flatMap((r) => {
+  const cycle = r.hop * 4;
+  return r.path.slice(0, -1).map((from, k) => ({
+    from,
+    to: r.path[k + 1],
+    cycle,
+    // negative delay = already mid-flow on first paint
+    delay: ((r.offset + k * r.hop) % cycle) - cycle,
+    mobile: r.mobile,
+  }));
+});
+
+const timing = (h: Hop) =>
+  ({
+    "--cycle": `${h.cycle}s`,
+    "--delay": `${h.delay.toFixed(2)}s`,
+  }) as CSSProperties;
 
 export default function HeroNetwork() {
   return (
@@ -33,6 +74,14 @@ export default function HeroNetwork() {
       aria-hidden
       focusable="false"
     >
+      <defs>
+        <radialGradient id="net-packet-glow">
+          <stop offset="0" stopColor="#a8f6ec" stopOpacity="0.55" />
+          <stop offset="1" stopColor="#5fe0cc" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* Links */}
       <g
         stroke="rgba(95,224,204,0.16)"
         strokeWidth="1"
@@ -52,60 +101,63 @@ export default function HeroNetwork() {
         ))}
       </g>
 
+      {/* Sites */}
       <g fill="rgba(95,224,204,0.45)">
         {nodes.map(([x, y], i) => (
-          <circle
-            key={i}
-            cx={x}
-            cy={y}
-            r={pulses.includes(i) ? 3.2 : 2.2}
-            className={pulses.includes(i) ? "net-node-glow" : undefined}
-            style={
-              pulses.includes(i)
-                ? ({ animationDelay: `${pulses.indexOf(i) * 1.3}s` } as CSSProperties)
-                : undefined
-            }
-          />
+          <circle key={i} cx={x} cy={y} r="2.2" />
         ))}
       </g>
 
-      <g fill="none" stroke="rgba(95,224,204,0.5)" strokeWidth="1">
-        {pulses.map((n, i) => (
-          <circle
-            key={n}
-            cx={nodes[n][0]}
-            cy={nodes[n][1]}
-            r="12"
-            vectorEffect="non-scaling-stroke"
-            className="net-pulse"
-            style={{ animationDelay: `${i * 1.3}s` } as CSSProperties}
-          />
-        ))}
-      </g>
-
-      <g fill="#8ff0e1" className="max-sm:hidden">
-        {travellers.map((t, i) => {
-          const [x1, y1] = nodes[t.from];
-          const [x2, y2] = nodes[t.to];
-          return (
+      {/* Arrival glow on the receiving node */}
+      {hops.map((h, i) => {
+        const [x, y] = nodes[h.to];
+        return (
+          <g key={i} className={h.mobile ? undefined : "max-sm:hidden"}>
             <circle
-              key={i}
-              cx={x1}
-              cy={y1}
-              r="2.6"
-              className="net-travel"
-              style={
-                {
-                  "--dx": `${x2 - x1}px`,
-                  "--dy": `${y2 - y1}px`,
-                  "--dur": t.dur,
-                  "--delay": t.delay,
-                } as CSSProperties
-              }
+              cx={x}
+              cy={y}
+              r="11"
+              fill="none"
+              stroke="rgba(143,240,225,0.55)"
+              strokeWidth="1"
+              vectorEffect="non-scaling-stroke"
+              className="net-arrive"
+              style={timing(h)}
             />
-          );
-        })}
-      </g>
+            <circle
+              cx={x}
+              cy={y}
+              r="3.2"
+              fill="#a8f6ec"
+              className="net-arrive-core"
+              style={timing(h)}
+            />
+          </g>
+        );
+      })}
+
+      {/* Packets */}
+      {hops.map((h, i) => {
+        const [x1, y1] = nodes[h.from];
+        const [x2, y2] = nodes[h.to];
+        return (
+          <g
+            key={i}
+            className={`net-packet ${h.mobile ? "" : "max-sm:hidden"}`}
+            style={
+              {
+                ...timing(h),
+                "--dx": `${x2 - x1}px`,
+                "--dy": `${y2 - y1}px`,
+              } as CSSProperties
+            }
+          >
+            <circle cx={x1} cy={y1} r="9" fill="url(#net-packet-glow)" />
+            <circle cx={x1} cy={y1} r="2.2" fill="#c4fbf3" />
+          </g>
+        );
+      })}
+      <HeroMotionPause />
     </svg>
   );
 }

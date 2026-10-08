@@ -596,57 +596,111 @@ select {
     linear-gradient(to left, #000 40%, transparent 95%);
   mask-composite: intersect;
 }
-.net-pulse {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: net-pulse 5.5s ease-out infinite;
+[data-hero-paused] .hero-light,
+[data-hero-paused] .hero-network *,
+[data-hero-paused] .signal-waves * {
+  animation-play-state: paused !important;
 }
-@keyframes net-pulse {
-  0% {
-    transform: scale(0.4);
-    opacity: 0.55;
-  }
-  70%,
-  100% {
-    transform: scale(1.8);
-    opacity: 0;
-  }
-}
-.net-node-glow {
-  animation: net-node 5.5s ease-in-out infinite;
-}
-@keyframes net-node {
-  0%,
-  100% {
-    opacity: 0.45;
-  }
-  20% {
-    opacity: 1;
-  }
-}
-.net-travel {
-  animation: net-travel var(--dur, 12s) linear infinite;
-  animation-delay: var(--delay, 0s);
+
+/* Network pulses: one hop = first 25% of the route cycle */
+.net-packet {
   opacity: 0;
+  animation: net-packet var(--cycle, 20s) var(--delay, 0s) infinite;
 }
-@keyframes net-travel {
+@keyframes net-packet {
   0% {
     transform: translate(0, 0);
     opacity: 0;
+    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
   }
-  8% {
-    opacity: 0.9;
+  3% {
+    opacity: 0.95;
   }
-  42% {
-    opacity: 0.9;
+  21% {
+    opacity: 0.95;
   }
-  50% {
+  25% {
     transform: translate(var(--dx), var(--dy));
     opacity: 0;
   }
   100% {
     transform: translate(var(--dx), var(--dy));
     opacity: 0;
+  }
+}
+.net-arrive,
+.net-arrive-core {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.net-arrive {
+  animation: net-arrive var(--cycle, 20s) var(--delay, 0s) ease-out infinite;
+}
+.net-arrive-core {
+  animation: net-arrive-core var(--cycle, 20s) var(--delay, 0s) ease-out
+    infinite;
+}
+@keyframes net-arrive {
+  0%,
+  23% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  26% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+  38%,
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+@keyframes net-arrive-core {
+  0%,
+  22% {
+    opacity: 0;
+  }
+  26% {
+    opacity: 0.9;
+  }
+  40%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Signal waves: 3 rings, 6s cycle, fading out as they expand */
+.net-wave {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: net-wave 6s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+}
+@keyframes net-wave {
+  0% {
+    transform: scale(0.08);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.38;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+.net-tower {
+  animation: net-tower 6s ease-in-out infinite;
+}
+@keyframes net-tower {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  10% {
+    opacity: 1;
   }
 }
 
@@ -744,11 +798,13 @@ select {
 @media (prefers-reduced-motion: reduce) {
   .hero-light,
   .glow-ring,
-  .net-node-glow {
+  .net-tower {
     animation: none !important;
   }
-  .net-pulse,
-  .net-travel {
+  .net-packet,
+  .net-arrive,
+  .net-arrive-core,
+  .net-wave {
     animation: none !important;
     opacity: 0 !important;
   }

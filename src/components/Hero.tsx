@@ -3,6 +3,7 @@ import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
 import { siteConfig } from "@/data/portfolio";
 import CountUp from "./CountUp";
 import HeroNetwork from "./HeroNetwork";
+import SignalWaves from "./SignalWaves";
 
 /**
  * KPI strip — figures mirror the O&M results stated in portfolio.ts
@@ -38,7 +39,8 @@ export default function Hero() {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
         <div className="grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16">
           {/* Copy */}
-          <div className="order-2 min-w-0 lg:order-1">
+          <div className="relative order-2 min-w-0 lg:order-1">
+            <SignalWaves />
             <div className="animate-fade-in-up flex items-center gap-3 opacity-0">
               <span
                 className="h-1.5 w-1.5 rounded-full bg-accent"
