@@ -12,7 +12,7 @@ import {
 import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import ScrollReveal from "./ScrollReveal";
-import PowerBiGlyph from "./PowerBiGlyph";
+import PowerBiLogo from "./PowerBiLogo";
 import { technologies } from "@/data/portfolio";
 
 type IconComp = ComponentType<{ size?: number; className?: string }>;
@@ -28,7 +28,7 @@ const meta: Record<
   { icons: IconComp[]; brand: string; group: GroupKey }
 > = {
   Python: { icons: [SiPython], brand: "#5a9fd6", group: "automation" },
-  "Power BI": { icons: [PowerBiGlyph], brand: "#f2c811", group: "automation" },
+  "Power BI": { icons: [PowerBiLogo], brand: "#f2c811", group: "automation" },
   "Generative AI": { icons: [Sparkles], brand: "#5fe0cc", group: "automation" },
   SQLite: { icons: [SiSqlite], brand: "#5fb4e6", group: "automation" },
   TETRA: { icons: [TbBroadcast], brand: "#5fe0cc", group: "telecom" },
