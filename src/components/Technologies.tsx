@@ -110,7 +110,6 @@ export default function Technologies() {
   const automation = byGroup("automation");
   const telecom = byGroup("telecom");
   const web = byGroup("web");
-  const [feature, ...automationRest] = automation;
 
   return (
     <Section id="technologies" ambient="right">
@@ -135,33 +134,20 @@ export default function Technologies() {
               title={groups[0].title}
               count={automation.length}
             />
-            <ul className="grid list-none gap-3 p-0 sm:grid-cols-2 sm:grid-rows-3 lg:h-[calc(100%-2.5rem)]">
-              {feature ? (
-                <li className="tile tile-hover group flex items-center gap-5 p-5 sm:row-span-3 sm:flex-col sm:items-start sm:justify-between sm:p-7">
-                  <Chip
-                    name={feature.name}
-                    size="chip-lit h-16 w-16 sm:h-24 sm:w-24 sm:rounded-[1.4rem]"
-                    iconSize={44}
-                  />
-                  <div className="min-w-0">
-                    <span className="label-mono block">
-                      {indexOf(feature.name)}
-                    </span>
-                    <span className="font-display mt-1 block text-[2.1rem] leading-none text-text sm:mt-2 sm:text-[3.25rem]">
-                      {feature.name}
-                    </span>
-                  </div>
-                </li>
-              ) : null}
-              {automationRest.map((tech) => (
+            <ul className="grid list-none gap-3 p-0 sm:grid-cols-2 lg:h-[calc(100%-2.5rem)] lg:grid-rows-2">
+              {automation.map((tech) => (
                 <li
                   key={tech.name}
-                  className="tile tile-hover group flex items-center gap-4 p-4"
+                  className="tile tile-hover group flex items-center gap-5 p-4 sm:flex-col sm:items-start sm:justify-between sm:gap-6 sm:p-5"
                 >
-                  <Chip name={tech.name} size="h-14 w-14" iconSize={26} />
+                  <Chip
+                    name={tech.name}
+                    size="h-14 w-14 sm:h-16 sm:w-16"
+                    iconSize={28}
+                  />
                   <div className="min-w-0">
                     <span className="label-mono block">{indexOf(tech.name)}</span>
-                    <span className="font-display mt-1 block text-[1.35rem] leading-[1.05] text-text sm:text-[1.65rem]">
+                    <span className="font-display mt-1 block text-[1.35rem] leading-[1.05] text-text sm:text-[1.9rem]">
                       {tech.name}
                     </span>
                   </div>

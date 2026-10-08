@@ -4,7 +4,7 @@ import {
   ChartSpline,
   HardDrive,
   MapPinned,
-  ScanBarcode,
+  QrCode,
   Wrench,
 } from "lucide-react";
 import TrafficLightIcon from "./TrafficLightIcon";
@@ -19,7 +19,7 @@ type GlyphComp = ComponentType<{
 const toolIcons: Record<string, GlyphComp> = {
   "Traffic Data Analysis Tool": ChartSpline,
   "Traffic Violation Manager (TVM)": TrafficLightIcon,
-  "Hardware Serial Manager (HSM)": ScanBarcode,
+  "Hardware Serial Manager (HSM)": QrCode,
   "SMART Drive Health Monitor": HardDrive,
   "Spare Usage": Boxes,
   "Fleet Map": MapPinned,
