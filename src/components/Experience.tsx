@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import Image from "next/image";
 import Section from "./Section";
 import ToolIcon from "./ToolIcon";
+import ExperienceLogoReveal from "./ExperienceLogoReveal";
 import SectionHeading from "./SectionHeading";
 import ScrollReveal from "./ScrollReveal";
 import { experience } from "@/data/portfolio";
@@ -91,7 +92,7 @@ export default function Experience() {
                 {companyLogos[job.company] ? (
                   <div className="mt-4 flex items-center gap-3.5">
                     <span
-                      className={`grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-[background-color,border-color] duration-500 ease-out group-hover/job:border-white/70 group-hover/job:bg-[#f3f5f4] motion-reduce:transition-none sm:h-12 sm:w-12 ${companyLogos[job.company].pad}`}
+                      className={`grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition-[background-color,border-color] duration-500 ease-out group-hover/job:border-white/70 group-hover/job:bg-[#f3f5f4] group-data-[logo-lit]/job:border-white/70 group-data-[logo-lit]/job:bg-[#f3f5f4] motion-reduce:transition-none sm:h-12 sm:w-12 ${companyLogos[job.company].pad}`}
                     >
                       <Image
                         src={companyLogos[job.company].src}
@@ -99,7 +100,7 @@ export default function Experience() {
                         height={companyLogos[job.company].height}
                         alt={`${job.company} logo`}
                         unoptimized
-                        className="h-full w-full object-contain opacity-80 brightness-0 grayscale invert transition-[filter,opacity] duration-500 ease-out group-hover/job:opacity-100 group-hover/job:filter-none motion-reduce:transition-none"
+                        className="h-full w-full object-contain opacity-80 brightness-0 grayscale invert transition-[filter,opacity] duration-500 ease-out group-hover/job:opacity-100 group-hover/job:filter-none group-data-[logo-lit]/job:opacity-100 group-data-[logo-lit]/job:filter-none motion-reduce:transition-none"
                       />
                     </span>
                     <p className="min-w-0 text-base font-medium text-accent sm:text-[1.0625rem]">
@@ -172,6 +173,7 @@ export default function Experience() {
           </ScrollReveal>
         ))}
       </div>
+      <ExperienceLogoReveal />
     </Section>
   );
 }
