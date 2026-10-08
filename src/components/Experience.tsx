@@ -1,4 +1,6 @@
+import type { CSSProperties } from "react";
 import Section from "./Section";
+import ToolIcon from "./ToolIcon";
 import SectionHeading from "./SectionHeading";
 import ScrollReveal from "./ScrollReveal";
 import { experience } from "@/data/portfolio";
@@ -9,7 +11,7 @@ import { experience } from "@/data/portfolio";
  */
 export default function Experience() {
   return (
-    <Section id="experience">
+    <Section id="experience" ambient="right">
       <ScrollReveal>
         <SectionHeading
           index="03"
@@ -19,16 +21,28 @@ export default function Experience() {
         />
       </ScrollReveal>
 
-      <div className="experience-stack flex w-full flex-col border-t border-border">
+      <div className="experience-stack flex w-full flex-col gap-5 sm:gap-6">
         {experience.map((job, index) => (
           <ScrollReveal key={job.company} delay={60} className="w-full">
-            <article className="grid w-full gap-6 border-b border-border py-10 sm:py-12 lg:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] lg:gap-12 lg:py-14">
+            <article
+              className={`surface grid w-full gap-6 px-5 py-8 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,15.5rem)_minmax(0,1fr)] lg:gap-12 lg:px-10 lg:py-12 ${
+                index === 0 ? "surface-light" : ""
+              }`}
+              style={
+                index === 0
+                  ? ({ "--light-x": "100%", "--light-y": "0%" } as CSSProperties)
+                  : undefined
+              }
+            >
               {/* Meta column */}
               <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2 lg:flex-col lg:gap-3">
-                <span className="label-mono !text-accent" aria-hidden>
+                <span
+                  className="font-display text-5xl leading-none text-white/15 lg:text-6xl"
+                  aria-hidden
+                >
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <p className="font-mono text-[13px] tracking-wide text-text">
+                <p className="font-mono text-[13px] tracking-wide text-text lg:whitespace-nowrap">
                   {job.period}
                 </p>
                 <p className="label-mono">{job.location}</p>
@@ -65,25 +79,28 @@ export default function Experience() {
 
                 {job.nestedTools && job.nestedTools.length > 0 ? (
                   <div className="mt-10">
-                    <div className="mb-1 flex items-center gap-3">
+                    <div className="flex items-center gap-3">
                       <p className="label-mono">Custom automation tools</p>
                       <span className="h-px flex-1 bg-border" aria-hidden />
                       <span className="label-mono">
                         {String(job.nestedTools.length).padStart(2, "0")}
                       </span>
                     </div>
-                    <ol className="grid list-none grid-cols-1 p-0 md:grid-cols-2 md:gap-x-10">
+                    <ol className="mt-4 grid list-none grid-cols-1 gap-3 p-0 md:grid-cols-2">
                       {job.nestedTools.map((tool, t) => (
                         <li
                           key={tool.name}
-                          className="grid min-w-0 grid-cols-[2.25rem_minmax(0,1fr)] gap-3 border-b border-border py-5"
+                          className="tile tile-hover group grid min-w-0 grid-cols-[2.75rem_minmax(0,1fr)] gap-4 p-4 sm:p-5"
                         >
-                          <span className="label-mono pt-1" aria-hidden>
-                            T{String(t + 1).padStart(2, "0")}
+                          <span className="chip h-11 w-11">
+                            <ToolIcon name={tool.name} size={19} />
                           </span>
                           <div className="min-w-0">
-                            <p className="text-[0.98rem] font-semibold leading-snug text-text">
-                              {tool.name}
+                            <p className="flex items-baseline gap-2 text-[0.98rem] font-semibold leading-snug text-text">
+                              <span className="label-mono !text-accent" aria-hidden>
+                                T{String(t + 1).padStart(2, "0")}
+                              </span>
+                              <span>{tool.name}</span>
                             </p>
                             <p className="mt-1.5 text-sm leading-relaxed break-words text-text-muted sm:text-[0.95rem]">
                               {tool.description}

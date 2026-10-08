@@ -5,7 +5,7 @@ import { about } from "@/data/portfolio";
 
 export default function About() {
   return (
-    <Section id="about">
+    <Section id="about" ambient="left">
       <ScrollReveal>
         <SectionHeading
           index="01"
@@ -29,14 +29,16 @@ export default function About() {
           </ScrollReveal>
 
           <ScrollReveal delay={200}>
-            <dl className="grid grid-cols-2 border-t border-l border-border">
-              {about.highlights.map((item) => (
+            <dl className="grid grid-cols-2 gap-3">
+              {about.highlights.map((item, i) => (
                 <div
                   key={item.label}
-                  className="flex flex-col gap-3 border-r border-b border-border p-5 sm:p-6"
+                  className={`surface flex flex-col gap-3 p-5 sm:p-6 ${
+                    i === 0 ? "surface-light" : ""
+                  }`}
                 >
                   <dt className="label-mono">{item.label}</dt>
-                  <dd className="font-display order-first m-0 text-[2.75rem] leading-none text-text sm:text-5xl">
+                  <dd className="font-display num-sheen order-first m-0 text-[2.75rem] leading-none sm:text-5xl">
                     {item.value}
                   </dd>
                 </div>

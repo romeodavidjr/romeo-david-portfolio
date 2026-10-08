@@ -29,7 +29,9 @@ export default function Hero() {
       id="home"
       className="stage-light relative overflow-hidden pt-24 pb-6 sm:pt-32 sm:pb-12 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-end lg:pt-36 lg:pb-16"
     >
-      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
+      <div className="hero-light hero-light-a" aria-hidden />
+      <div className="hero-light hero-light-b" aria-hidden />
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
         <div className="grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16">
           {/* Copy */}
           <div className="order-2 min-w-0 lg:order-1">
@@ -79,7 +81,16 @@ export default function Hero() {
           </div>
 
           {/* Portrait */}
-          <figure className="animate-fade-in-up animation-delay-200 order-1 m-0 opacity-0 lg:order-2">
+          <figure className="animate-fade-in-up animation-delay-200 relative isolate order-1 m-0 opacity-0 lg:order-2">
+            <div
+              className="pointer-events-none absolute -inset-10 -z-10 rounded-[3rem] bg-[radial-gradient(closest-side,rgba(95,224,204,0.14),transparent)] blur-2xl"
+              aria-hidden
+            />
+            <div className="relative">
+            <div
+              className="pointer-events-none absolute inset-0 translate-x-3 translate-y-3 rounded-[1.25rem] border border-white/[0.08] max-lg:hidden"
+              aria-hidden
+            />
             <div className="portrait-frame aspect-[4/3] w-full sm:aspect-[16/10] lg:aspect-[4/5] lg:w-[21rem] xl:w-[24rem]">
               {/* eslint-disable-next-line @next/next/no-img-element -- plain img avoids optimizer 500s if sharp/path fails */}
               <img
@@ -92,23 +103,27 @@ export default function Hero() {
                 fetchPriority="high"
               />
             </div>
-            <figcaption className="mt-3 flex items-center justify-between gap-4">
+            </div>
+            <figcaption className="mt-3 flex items-center justify-between gap-4 lg:mt-6">
               <span className="label-mono">{siteConfig.location}</span>
             </figcaption>
           </figure>
         </div>
 
         {/* KPI strip */}
-        <dl className="animate-fade-in-up animation-delay-500 mt-14 grid grid-cols-2 border-t border-border opacity-0 sm:mt-20 sm:grid-cols-3 lg:grid-cols-5">
+        <dl className="surface animate-fade-in-up animation-delay-500 mt-14 grid grid-cols-2 px-5 opacity-0 sm:mt-20 sm:grid-cols-3 sm:px-8 lg:grid-cols-5 lg:px-2">
           {heroStats.map((stat, i) => (
             <div
               key={stat.label}
-              className={`flex flex-col gap-3 border-b border-border py-6 pr-4 sm:py-7 lg:border-b-0 lg:pl-6 lg:first:pl-0 ${
-                i % 2 === 1 ? "pl-4 sm:pl-0" : ""
-              } ${i === heroStats.length - 1 ? "col-span-2 sm:col-span-1" : ""} lg:border-l lg:first:border-l-0`}
+              className={`flex flex-col gap-3 py-6 pr-4 sm:py-7 lg:px-7 ${
+                i < heroStats.length - 1 ? "border-b border-border lg:border-b-0" : ""
+              } ${i >= 3 ? "sm:border-b-0" : ""
+              } ${i % 2 === 1 ? "pl-4 sm:pl-0" : ""} ${
+                i === heroStats.length - 1 ? "col-span-2 sm:col-span-1" : ""
+              } ${i > 0 ? "lg:border-l lg:border-border" : ""}`}
             >
               <dt className="label-mono">{stat.label}</dt>
-              <dd className="font-display order-first m-0 text-[2.75rem] leading-none text-text sm:text-5xl xl:text-[3.75rem]">
+              <dd className="font-display num-sheen order-first m-0 text-[2.75rem] leading-none sm:text-5xl xl:text-[3.75rem]">
                 {stat.value}
               </dd>
             </div>
