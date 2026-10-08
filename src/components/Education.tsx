@@ -34,7 +34,7 @@ export default function Education() {
             </div>
             <ul className="flex list-none flex-col gap-3 p-0">
               {education.map((item) => (
-                <li key={item.title} className="tile p-5 sm:p-6">
+                <li key={item.title} data-reveal="" className="tile p-5 sm:p-6">
                   <h3 className="font-display text-[1.65rem] leading-[1.12] text-text sm:text-[1.9rem]">
                     {item.title}
                   </h3>
@@ -70,6 +70,7 @@ export default function Education() {
                 return (
                   <li
                     key={item.title}
+                    data-reveal=""
                     className="tile tile-hover group grid grid-cols-[2.5rem_minmax(0,1fr)] items-start gap-4 p-4 sm:p-5"
                   >
                     <span className="chip h-10 w-10" aria-hidden>

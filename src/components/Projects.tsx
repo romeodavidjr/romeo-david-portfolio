@@ -106,6 +106,7 @@ export default function Projects() {
                       {project.items.map((item, r) => (
                         <li
                           key={item.name}
+                          data-reveal=""
                           className="tile tile-hover group relative flex flex-col overflow-hidden p-5 sm:p-6"
                         >
                           <span

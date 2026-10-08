@@ -553,17 +553,46 @@ select {
   animation-delay: 0.5s;
 }
 
-.reveal {
+/*
+ * Scroll reveal. Content is visible by default (SSR / no-JS / crawlers).
+ * RevealManager adds .reveal-pending only to elements that start below the
+ * fold, then .reveal-in once they enter the viewport; both are removed after
+ * the transition so hover transitions are unaffected.
+ */
+.reveal-pending {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translate3d(0, 20px, 0);
+}
+.reveal-pending.reveal-in {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
   transition:
-    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+/* Counting KPI: width locked to the final value to avoid layout shift */
+.count-box {
+  position: relative;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+.count-box > .count-sizer {
+  visibility: hidden;
+}
+.count-box > .count-live {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+}
+/* background-clip:text does not reach an absolutely positioned child,
+   so the sheen is re-applied on the live number itself */
+.num-sheen .count-live {
+  background-image: linear-gradient(180deg, #ffffff 10%, #c3cccb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* Focus ring for accessibility */
@@ -595,7 +624,7 @@ select {
   html {
     scroll-behavior: auto;
   }
-  .reveal,
+  .reveal-pending,
   .btn,
   .surface,
   .tile,
@@ -604,7 +633,7 @@ select {
     transition: none !important;
     animation: none !important;
   }
-  .reveal,
+  .reveal-pending,
   .animate-fade-in-up {
     opacity: 1 !important;
     transform: none !important;

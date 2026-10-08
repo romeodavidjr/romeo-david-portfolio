@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
 import { siteConfig } from "@/data/portfolio";
+import CountUp from "./CountUp";
 
 /**
  * KPI strip — figures mirror the O&M results stated in portfolio.ts
@@ -124,7 +125,7 @@ export default function Hero() {
             >
               <dt className="label-mono">{stat.label}</dt>
               <dd className="font-display num-sheen order-first m-0 text-[2.75rem] leading-none sm:text-5xl xl:text-[3.75rem]">
-                {stat.value}
+                <CountUp value={stat.value} />
               </dd>
             </div>
           ))}

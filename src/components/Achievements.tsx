@@ -12,6 +12,7 @@ import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import ScrollReveal from "./ScrollReveal";
 import { achievements } from "@/data/portfolio";
+import CountUp from "./CountUp";
 
 /** Presentation per position: bento span, glyph, optional meter. */
 const layout: {
@@ -70,7 +71,7 @@ export default function Achievements() {
                           : "text-[3.25rem] sm:text-[3.75rem]"
                       }`}
                     >
-                      {item.value}
+                      <CountUp value={item.value} />
                     </p>
                     <span
                       className={`chip ${isXL ? "h-12 w-12 sm:h-14 sm:w-14" : "h-11 w-11"} ${

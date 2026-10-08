@@ -138,6 +138,7 @@ export default function Technologies() {
               {automation.map((tech) => (
                 <li
                   key={tech.name}
+                  data-reveal=""
                   className="tile tile-hover group flex items-center gap-5 p-4 sm:flex-col sm:items-start sm:justify-between sm:gap-6 sm:p-5"
                 >
                   <Chip
@@ -172,6 +173,7 @@ export default function Technologies() {
               {telecom.map((tech) => (
                 <li
                   key={tech.name}
+                  data-reveal=""
                   className="tile tile-hover group flex items-center gap-5 p-4 sm:p-5"
                 >
                   <Chip
@@ -206,6 +208,7 @@ export default function Technologies() {
               {web.map((tech) => (
                 <li
                   key={tech.name}
+                  data-reveal=""
                   className="tile tile-hover group flex items-center gap-4 p-4"
                 >
                   <Chip

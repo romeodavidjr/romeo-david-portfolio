@@ -90,6 +90,7 @@ export default function Experience() {
                       {job.nestedTools.map((tool, t) => (
                         <li
                           key={tool.name}
+                          data-reveal=""
                           className="tile tile-hover group grid min-w-0 grid-cols-[2.75rem_minmax(0,1fr)] gap-4 p-4 sm:p-5"
                         >
                           <span className="chip h-11 w-11">
