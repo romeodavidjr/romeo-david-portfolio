@@ -53,6 +53,18 @@ const groups: { key: GroupKey; code: string; title: string }[] = [
   { key: "web", code: "C", title: "Web & tooling" },
 ];
 
+/** Lets long names wrap after each "/" instead of overflowing the tile. */
+const breakable = (name: string) =>
+  name.split("/").map((part, i, arr) =>
+    i < arr.length - 1 ? (
+      <span key={i}>
+        {part}/<wbr />
+      </span>
+    ) : (
+      <span key={i}>{part}</span>
+    ),
+  );
+
 const indexOf = (name: string) =>
   String(technologies.findIndex((t) => t.name === name) + 1).padStart(2, "0");
 
@@ -148,8 +160,8 @@ export default function Technologies() {
                   />
                   <div className="min-w-0">
                     <span className="label-mono block">{indexOf(tech.name)}</span>
-                    <span className="font-display mt-1 block text-[1.35rem] leading-[1.05] text-text sm:text-[1.9rem]">
-                      {tech.name}
+                    <span className="font-display mt-1 block text-[1.35rem] leading-[1.05] text-text [overflow-wrap:anywhere] sm:text-[1.9rem]">
+                      {breakable(tech.name)}
                     </span>
                   </div>
                 </li>
@@ -183,8 +195,8 @@ export default function Technologies() {
                   />
                   <div className="min-w-0">
                     <span className="label-mono block">{indexOf(tech.name)}</span>
-                    <span className="font-display mt-1 block text-[1.35rem] leading-[1.05] text-text sm:text-[1.9rem]">
-                      {tech.name}
+                    <span className="font-display mt-1 block text-[1.35rem] leading-[1.05] text-text [overflow-wrap:anywhere] sm:text-[1.9rem]">
+                      {breakable(tech.name)}
                     </span>
                   </div>
                 </li>
@@ -204,12 +216,12 @@ export default function Technologies() {
               title={groups[2].title}
               count={web.length}
             />
-            <ul className="grid list-none gap-3 p-0 sm:grid-cols-3">
+            <ul className="grid list-none gap-3 p-0 lg:grid-cols-3">
               {web.map((tech) => (
                 <li
                   key={tech.name}
                   data-reveal=""
-                  className="tile tile-hover group flex items-center gap-4 p-4"
+                  className="tile tile-hover group flex min-w-0 items-center gap-4 p-4 sm:gap-5 sm:p-5 lg:gap-4 lg:p-4"
                 >
                   <Chip
                     name={tech.name}
@@ -222,8 +234,8 @@ export default function Technologies() {
                   />
                   <div className="min-w-0">
                     <span className="label-mono block">{indexOf(tech.name)}</span>
-                    <span className="font-display mt-1 block text-[1.35rem] leading-[1.05] text-text sm:text-[1.65rem]">
-                      {tech.name}
+                    <span className="font-display mt-1 block text-[1.35rem] leading-[1.05] text-text [overflow-wrap:anywhere] sm:text-[1.65rem] lg:text-[1.5rem] xl:text-[1.65rem]">
+                      {breakable(tech.name)}
                     </span>
                   </div>
                 </li>
