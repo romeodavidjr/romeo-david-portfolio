@@ -142,9 +142,10 @@ export default function Projects() {
           return (
             <ScrollReveal key={project.title} delay={60}>
               <article
-                className="surface surface-light overflow-hidden"
+                className="surface surface-light"
                 style={{ "--light-x": "0%", "--light-y": "0%" } as CSSProperties}
               >
+                <span className="glow-ring" style={{ "--glow-duration": "9s" } as CSSProperties} aria-hidden />
                 <RecordHeader caseNo={caseNo} period={project.period} />
                 <div className="grid gap-10 px-5 py-8 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-12 lg:px-10 lg:py-12">
                   <div className="flex min-w-0 flex-col">

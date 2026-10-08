@@ -521,6 +521,135 @@ select {
   }
 }
 
+
+/* ── Cursor spotlight (fine pointers only; set up by SpotlightManager) ── */
+.surface::after,
+.tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    260px circle at var(--x, 50%) var(--y, 50%),
+    rgba(95, 224, 204, 0.075),
+    transparent 65%
+  );
+}
+.spot-on::after {
+  opacity: 1;
+}
+
+/* ── Travelling border light for key cards ── */
+@property --glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.glow-ring {
+  position: absolute;
+  inset: -1px;
+  z-index: 2;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  /* Without @property support the angle cannot interpolate, so this
+     stays a static highlighted edge (0deg and 360deg look identical). */
+  background: conic-gradient(
+    from var(--glow-angle),
+    transparent 0deg,
+    transparent 250deg,
+    rgba(95, 224, 204, 0.25) 300deg,
+    rgba(150, 245, 230, 0.85) 340deg,
+    rgba(95, 224, 204, 0.25) 352deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: glow-orbit var(--glow-duration, 8s) linear infinite;
+}
+@keyframes glow-orbit {
+  to {
+    --glow-angle: 360deg;
+  }
+}
+
+/* ── Hero network lines ── */
+.hero-network {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask-image:
+    linear-gradient(to bottom, #000 45%, transparent 92%),
+    linear-gradient(to left, #000 40%, transparent 95%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, #000 45%, transparent 92%),
+    linear-gradient(to left, #000 40%, transparent 95%);
+  mask-composite: intersect;
+}
+.net-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: net-pulse 5.5s ease-out infinite;
+}
+@keyframes net-pulse {
+  0% {
+    transform: scale(0.4);
+    opacity: 0.55;
+  }
+  70%,
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+.net-node-glow {
+  animation: net-node 5.5s ease-in-out infinite;
+}
+@keyframes net-node {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  20% {
+    opacity: 1;
+  }
+}
+.net-travel {
+  animation: net-travel var(--dur, 12s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  opacity: 0;
+}
+@keyframes net-travel {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  42% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(var(--dx), var(--dy));
+    opacity: 0;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy));
+    opacity: 0;
+  }
+}
+
 /* ── Motion ── */
 @keyframes fade-in-up {
   from {
@@ -607,15 +736,25 @@ select {
 
 /* Experience: no timeline decorations (rail, dots, markers) on any breakpoint */
 #experience .experience-stack::before,
-#experience .experience-stack::after,
-#experience article::after {
+#experience .experience-stack::after {
   content: none !important;
   display: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-light {
+  .hero-light,
+  .glow-ring,
+  .net-node-glow {
     animation: none !important;
+  }
+  .net-pulse,
+  .net-travel {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+  .surface::after,
+  .tile::after {
+    display: none;
   }
   .surface-hover:hover,
   .tile-hover:hover {

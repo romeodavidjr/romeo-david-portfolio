@@ -1,6 +1,8 @@
+import type { CSSProperties } from "react";
 import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
 import { siteConfig } from "@/data/portfolio";
 import CountUp from "./CountUp";
+import HeroNetwork from "./HeroNetwork";
 
 /**
  * KPI strip — figures mirror the O&M results stated in portfolio.ts
@@ -32,6 +34,7 @@ export default function Hero() {
     >
       <div className="hero-light hero-light-a" aria-hidden />
       <div className="hero-light hero-light-b" aria-hidden />
+      <HeroNetwork />
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
         <div className="grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16">
           {/* Copy */}
@@ -112,7 +115,13 @@ export default function Hero() {
         </div>
 
         {/* KPI strip */}
-        <dl className="surface animate-fade-in-up animation-delay-500 mt-14 grid grid-cols-2 px-5 opacity-0 sm:mt-20 sm:grid-cols-3 sm:px-8 lg:grid-cols-5 lg:px-2">
+        <div className="surface animate-fade-in-up animation-delay-500 mt-14 opacity-0 sm:mt-20">
+          <span
+            className="glow-ring"
+            style={{ "--glow-duration": "10s" } as CSSProperties}
+            aria-hidden
+          />
+          <dl className="m-0 grid grid-cols-2 px-5 sm:grid-cols-3 sm:px-8 lg:grid-cols-5 lg:px-2">
           {heroStats.map((stat, i) => (
             <div
               key={stat.label}
@@ -129,7 +138,8 @@ export default function Hero() {
               </dd>
             </div>
           ))}
-        </dl>
+          </dl>
+        </div>
 
         <div className="animate-fade-in-up animation-delay-500 mt-8 hidden opacity-0 sm:block">
           <a

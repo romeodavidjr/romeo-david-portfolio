@@ -10,6 +10,7 @@ import Education from "@/components/Education";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import RevealManager from "@/components/RevealManager";
+import SpotlightManager from "@/components/SpotlightManager";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
       </main>
       <Footer />
       <RevealManager />
+      <SpotlightManager />
     </>
   );
 }

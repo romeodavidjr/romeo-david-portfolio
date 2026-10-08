@@ -80,7 +80,7 @@ export default function Education() {
                       <h3 className="text-base font-semibold leading-snug text-text sm:text-[1.0625rem]">
                         {item.title}
                       </h3>
-                      <p className="label-mono mt-1.5">{item.institution}</p>
+                      <p className="label-mono mt-1.5 text-pretty !leading-[1.6]">{item.institution}</p>
                     </div>
                   </li>
                 );

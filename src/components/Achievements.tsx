@@ -59,6 +59,7 @@ export default function Achievements() {
                       : undefined
                   }
                 >
+                  {isXL ? <span className="glow-ring" aria-hidden /> : null}
                   <div
                     className={`flex items-start justify-between gap-4 ${
                       l.size === "wide" ? "sm:w-[13rem] sm:shrink-0 sm:flex-col sm:justify-start" : ""

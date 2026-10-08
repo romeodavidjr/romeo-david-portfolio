@@ -335,7 +335,7 @@ export const certifications = [
   {
     title:
       "Licensed Professional Electronics Engineer (PECE) and Electronics Engineer (ECE)",
-    institution: "Philippines",
+    institution: "Professional Regulation Commission (PRC), Philippines",
   },
   {
     title: "Certified General Security Professional (CGSP)",
