@@ -40,7 +40,11 @@ const pageTitle =
 const pageDescription =
   "Senior Telecommunications Engineer with 19+ years of experience in telecom operations, ATMS, Python automation, and data analytics. Based in Riyadh, KSA.";
 
+const siteUrl = "https://romeo-david-portfolio.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  alternates: { canonical: "/" },
   title: {
     default: pageTitle,
     template: `%s | ${siteConfig.name}`,
@@ -61,6 +65,7 @@ export const metadata: Metadata = {
   creator: siteConfig.name,
   openGraph: {
     type: "website",
+    url: "/",
     locale: "en_US",
     title: pageTitle,
     description: pageDescription,
