@@ -21,7 +21,7 @@ const layout: {
   size: "xl" | "md" | "wide";
   meter?: { from: number; to: number };
 }[] = [
-  { span: "sm:col-span-2 lg:col-span-6 lg:row-span-2", icon: Gauge, size: "xl", meter: { from: 0, to: 97.6 } },
+  { span: "sm:col-span-2 lg:col-span-6 lg:row-span-2", icon: Gauge, size: "xl", meter: { from: 0, to: 97.8 } },
   { span: "lg:col-span-3", icon: Timer, size: "md" },
   { span: "lg:col-span-3", icon: MapPinned, size: "md" },
   { span: "sm:col-span-2 lg:col-span-6", icon: Activity, size: "wide", meter: { from: 65, to: 80 } },

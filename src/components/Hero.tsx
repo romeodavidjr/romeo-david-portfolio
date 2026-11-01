@@ -7,12 +7,12 @@ import SignalWaves from "./SignalWaves";
 
 /**
  * KPI strip — figures mirror the O&M results stated in portfolio.ts
- * (372 tickets, 97.6% YTD SLA, 22.1h MTTR, zero overdue, 100% restoration).
+ * (406 tickets, 97.8% YTD SLA, 21.2h MTTR, zero overdue, 100% restoration).
  */
 const heroStats = [
-  { value: "372", label: "O&M tickets" },
-  { value: "97.6%", label: "YTD SLA compliance" },
-  { value: "22.1h", label: "Average MTTR" },
+  { value: "406", label: "O&M tickets" },
+  { value: "97.8%", label: "YTD SLA compliance" },
+  { value: "21.2h", label: "Average MTTR" },
   { value: "Zero", label: "Overdue tickets" },
   { value: "100%", label: "Restoration rate" },
 ];

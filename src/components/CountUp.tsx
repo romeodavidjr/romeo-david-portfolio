@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 type CountUpProps = {
-  /** Final display value exactly as in the data, e.g. "372", "97.6%", "22.1h", "100+" */
+  /** Final display value exactly as in the data, e.g. "406", "97.8%", "21.2h", "100+" */
   value: string;
   duration?: number;
   className?: string;
