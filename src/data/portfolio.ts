@@ -20,6 +20,7 @@ export const about = {
   paragraphs: [
     "Results-driven Senior Telecommunications Engineer with 19+ years of experience in telecom project management, multi-vendor network operations, and custom automation development. Currently serving as Data & Automation Team Lead at ASTEK Saudi Arabia Limited, leading Operations & Maintenance for IDEMIA MestaFusion Automatic Traffic Monitoring Systems (ATMS) across 100+ sites in the KSA Central Region.",
     "Achieved 97.8% YTD SLA compliance with an average MTTR of 21.2 hours. Independently developed six custom automation tools (Python and PowerShell) and Power BI dashboards that reduced daily data-processing time by 65–80%. Skilled in Generative AI and Agentic AI-assisted development, cross-functional leadership, and delivering clear technical insights to stakeholders.",
+    "I design and supervise specialized AI agents that help run operations: ingesting and tracking field tickets against SLAs, maintaining a live map of deployed sites, reporting spare-parts usage, and supporting planning and timesheet workflows. I review their output and keep final decisions with me.",
   ],
   highlights: [
     { label: "Years Experience", value: "19+" },
